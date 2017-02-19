@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA711E4D84FD00C0E6C0 /* main.m */; };
+		0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */; };
+		0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA771E4D84FD00C0E6C0 /* ViewController.m */; };
+		0BF1BA7B1E4D84FD00C0E6C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF1BA791E4D84FD00C0E6C0 /* Main.storyboard */; };
+		0BF1BA7D1E4D84FD00C0E6C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF1BA7C1E4D84FD00C0E6C0 /* Assets.xcassets */; };
+		0BF1BA801E4D84FD00C0E6C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF1BA7E1E4D84FD00C0E6C0 /* LaunchScreen.storyboard */; };
+		0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */; };
+		0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */; };
+		0BF1BA991E4D899600C0E6C0 /* JCPageSlideBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */; };
+		0BF1BA9C1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */; };
+		0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */; };
+		0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0BF1BA6D1E4D84FD00C0E6C0 /* JCPageControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCPageControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BF1BA711E4D84FD00C0E6C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0BF1BA731E4D84FD00C0E6C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0BF1BA761E4D84FD00C0E6C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0BF1BA771E4D84FD00C0E6C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0BF1BA7A1E4D84FD00C0E6C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0BF1BA7C1E4D84FD00C0E6C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0BF1BA7F1E4D84FD00C0E6C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0BF1BA811E4D84FD00C0E6C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BF1BA8F1E4D897E00C0E6C0 /* JCPageContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageContoller.h; sourceTree = "<group>"; };
+		0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageContoller.m; sourceTree = "<group>"; };
+		0BF1BA931E4D897E00C0E6C0 /* JCPageSlideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBar.h; sourceTree = "<group>"; };
+		0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBar.m; sourceTree = "<group>"; };
+		0BF1BA971E4D899600C0E6C0 /* JCPageSlideBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarItem.h; sourceTree = "<group>"; };
+		0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarItem.m; sourceTree = "<group>"; };
+		0BF1BA9A1E4D945900C0E6C0 /* JCPageSlideBarDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarDataSource.h; sourceTree = "<group>"; };
+		0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarDataSource.m; sourceTree = "<group>"; };
+		0BF1BA9D1E4D999900C0E6C0 /* JCPageSlideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarCell.h; sourceTree = "<group>"; };
+		0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarCell.m; sourceTree = "<group>"; };
+		0BF1BAA71E509DB100C0E6C0 /* JCPageSlideContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideContentView.h; sourceTree = "<group>"; };
+		0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideContentView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0BF1BA6A1E4D84FD00C0E6C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0BF1BA641E4D84FD00C0E6C0 = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA871E4D851A00C0E6C0 /* JCPageController */,
+				0BF1BA6F1E4D84FD00C0E6C0 /* JCPageControllerDemo */,
+				0BF1BA6E1E4D84FD00C0E6C0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0BF1BA6E1E4D84FD00C0E6C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA6D1E4D84FD00C0E6C0 /* JCPageControllerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0BF1BA6F1E4D84FD00C0E6C0 /* JCPageControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA731E4D84FD00C0E6C0 /* AppDelegate.h */,
+				0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */,
+				0BF1BA761E4D84FD00C0E6C0 /* ViewController.h */,
+				0BF1BA771E4D84FD00C0E6C0 /* ViewController.m */,
+				0BF1BA791E4D84FD00C0E6C0 /* Main.storyboard */,
+				0BF1BA7C1E4D84FD00C0E6C0 /* Assets.xcassets */,
+				0BF1BA7E1E4D84FD00C0E6C0 /* LaunchScreen.storyboard */,
+				0BF1BA811E4D84FD00C0E6C0 /* Info.plist */,
+				0BF1BA701E4D84FD00C0E6C0 /* Supporting Files */,
+			);
+			path = JCPageControllerDemo;
+			sourceTree = "<group>";
+		};
+		0BF1BA701E4D84FD00C0E6C0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA711E4D84FD00C0E6C0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0BF1BA871E4D851A00C0E6C0 /* JCPageController */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA8E1E4D897E00C0E6C0 /* Controller */,
+				0BF1BA911E4D897E00C0E6C0 /* Model */,
+				0BF1BA921E4D897E00C0E6C0 /* View */,
+			);
+			path = JCPageController;
+			sourceTree = "<group>";
+		};
+		0BF1BA8E1E4D897E00C0E6C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA8F1E4D897E00C0E6C0 /* JCPageContoller.h */,
+				0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0BF1BA911E4D897E00C0E6C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA971E4D899600C0E6C0 /* JCPageSlideBarItem.h */,
+				0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */,
+				0BF1BA9A1E4D945900C0E6C0 /* JCPageSlideBarDataSource.h */,
+				0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0BF1BA921E4D897E00C0E6C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BF1BA931E4D897E00C0E6C0 /* JCPageSlideBar.h */,
+				0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */,
+				0BF1BA9D1E4D999900C0E6C0 /* JCPageSlideBarCell.h */,
+				0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */,
+				0BF1BAA71E509DB100C0E6C0 /* JCPageSlideContentView.h */,
+				0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0BF1BA6C1E4D84FD00C0E6C0 /* JCPageControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BF1BA841E4D84FD00C0E6C0 /* Build configuration list for PBXNativeTarget "JCPageControllerDemo" */;
+			buildPhases = (
+				0BF1BA691E4D84FD00C0E6C0 /* Sources */,
+				0BF1BA6A1E4D84FD00C0E6C0 /* Frameworks */,
+				0BF1BA6B1E4D84FD00C0E6C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JCPageControllerDemo;
+			productName = JCPageControllerDemo;
+			productReference = 0BF1BA6D1E4D84FD00C0E6C0 /* JCPageControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0BF1BA651E4D84FD00C0E6C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = ZhengJiacheng;
+				TargetAttributes = {
+					0BF1BA6C1E4D84FD00C0E6C0 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0BF1BA681E4D84FD00C0E6C0 /* Build configuration list for PBXProject "JCPageControllerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0BF1BA641E4D84FD00C0E6C0;
+			productRefGroup = 0BF1BA6E1E4D84FD00C0E6C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0BF1BA6C1E4D84FD00C0E6C0 /* JCPageControllerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0BF1BA6B1E4D84FD00C0E6C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BF1BA801E4D84FD00C0E6C0 /* LaunchScreen.storyboard in Resources */,
+				0BF1BA7D1E4D84FD00C0E6C0 /* Assets.xcassets in Resources */,
+				0BF1BA7B1E4D84FD00C0E6C0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0BF1BA691E4D84FD00C0E6C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */,
+				0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */,
+				0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */,
+				0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */,
+				0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */,
+				0BF1BA991E4D899600C0E6C0 /* JCPageSlideBarItem.m in Sources */,
+				0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */,
+				0BF1BA9C1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m in Sources */,
+				0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0BF1BA791E4D84FD00C0E6C0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0BF1BA7A1E4D84FD00C0E6C0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0BF1BA7E1E4D84FD00C0E6C0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0BF1BA7F1E4D84FD00C0E6C0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0BF1BA821E4D84FD00C0E6C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0BF1BA831E4D84FD00C0E6C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0BF1BA851E4D84FD00C0E6C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = JCPageControllerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengjiacheng.JCPageControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0BF1BA861E4D84FD00C0E6C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = JCPageControllerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengjiacheng.JCPageControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0BF1BA681E4D84FD00C0E6C0 /* Build configuration list for PBXProject "JCPageControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BF1BA821E4D84FD00C0E6C0 /* Debug */,
+				0BF1BA831E4D84FD00C0E6C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0BF1BA841E4D84FD00C0E6C0 /* Build configuration list for PBXNativeTarget "JCPageControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BF1BA851E4D84FD00C0E6C0 /* Debug */,
+				0BF1BA861E4D84FD00C0E6C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0BF1BA651E4D84FD00C0E6C0 /* Project object */;
+}
