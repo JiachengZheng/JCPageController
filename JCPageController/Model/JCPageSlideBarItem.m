@@ -10,4 +10,12 @@
 
 @implementation JCPageSlideBarItem
 
+- (NSString *)identifier{
+    if (!_identifier) {
+        return @"";
+    }
+    return _identifier;
+}
+
+
 @end

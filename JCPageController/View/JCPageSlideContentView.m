@@ -23,8 +23,6 @@
         self.pagingEnabled = YES;
         self.scrollsToTop = NO;
         self.showsVerticalScrollIndicator = NO;
-        //self.showsHorizontalScrollIndicator = NO;
-        self.backgroundColor = [UIColor redColor];
     }
     return self;
 }

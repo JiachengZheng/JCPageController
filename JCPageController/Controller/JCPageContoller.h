@@ -9,7 +9,19 @@
 #import <UIKit/UIKit.h>
 @class JCPageSlideBarItem;
 
-@interface JCPageContoller : UIViewController
+@protocol JCPageContollerDelegate <NSObject>
+
+@required
+
+- (UIViewController<JCPageContollerDelegate> *)pageForRowByItem:(JCPageSlideBarItem *)item;
+
+- (UIViewController<JCPageContollerDelegate> *)dequeueReusablePageWithItem:(JCPageSlideBarItem *)item;
+
+@optional
+
+@end
+
+@interface JCPageContoller : UIViewController <JCPageContollerDelegate>
 
 @property (nonatomic, strong) NSArray<JCPageSlideBarItem *> *slideBarItems;
 
