@@ -44,6 +44,10 @@
     return _collectionView;
 }
 
+- (void)selectTabAtIndex:(NSInteger)index;{
+    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+}
+
 - (void)reloadData{
     [self.collectionView reloadData];
 }

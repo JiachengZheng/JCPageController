@@ -19,10 +19,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.contentSize = CGSizeMake(3 * self.frame.size.width, self.frame.size.height);
+        self.contentSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
         self.pagingEnabled = YES;
         self.scrollsToTop = NO;
         self.showsVerticalScrollIndicator = NO;
+        self.alwaysBounceVertical = NO;
     }
     return self;
 }

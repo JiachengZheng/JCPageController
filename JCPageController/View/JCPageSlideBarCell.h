@@ -10,4 +10,7 @@
 
 @interface JCPageSlideBarCell : UICollectionViewCell
 @property (nonatomic, copy) NSString *text;
+
+
+
 @end

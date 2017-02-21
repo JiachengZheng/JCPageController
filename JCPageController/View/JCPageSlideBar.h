@@ -16,5 +16,7 @@
 @property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
 @property (nonatomic, weak) JCPageContoller *controller;
 
+- (void)selectTabAtIndex:(NSInteger)index;
+
 - (void)reloadData;
 @end

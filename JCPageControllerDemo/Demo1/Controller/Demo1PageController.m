@@ -10,6 +10,9 @@
 #import "Demo1Model.h"
 #import "Demo1BarItem.h"
 #import "JCPageContoller.h"
+
+#define kRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
+
 @interface Demo1PageController () <JCPageContollerDataSource, JCPageContollerDelegate>
 @property (nonatomic, strong) Demo1Model *model;
 @property (nonatomic, strong) JCPageContoller *pageController;
@@ -49,18 +52,28 @@
 
 - (NSString *)reuseIdentifierForControllerAtIndex:(NSInteger)index;{
     Demo1BarItem *item = self.model.barItems[index];
-    return item.identifier;
+    return @"1";//item.identifier;
+}
+
+- (UIViewController *)testController{
+    UIViewController *testController = [[UIViewController alloc]init];
+    UILabel *label = [[UILabel alloc]initWithFrame:testController.view.bounds];
+    [testController.view addSubview:label];
+    label.font = [UIFont systemFontOfSize:19];
+    testController.view.backgroundColor = kRandomColor;
+    label.tag = 2000;
+    label.textAlignment = NSTextAlignmentCenter;
+    return testController;
 }
 
 - (UIViewController *)pageContoller:(JCPageContoller *)pageContoller controllerAtIndex:(NSInteger)index{
     Demo1BarItem *item = self.model.barItems[index];
-    UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:item.identifier];
+    UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:@"1"];
     if (!controller) {
-        // init controller
-        UIViewController *subController = [[UIViewController alloc]init];
-        subController.view.backgroundColor = [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
-        controller = subController;
+        controller = self.testController;
     }
+    UILabel *label = [controller.view viewWithTag:2000];
+    label.text = [NSString stringWithFormat:@"page%ld",index];
     return controller;
 }
 
