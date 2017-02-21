@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIViewController *nextController;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSInteger nextIndex;
+@property (nonatomic, assign) CGFloat lastOffsetX;
+@property (nonatomic) BOOL isInteractionScroll;
 @end
 
 @implementation JCPageContoller
@@ -64,7 +66,7 @@
     NSInteger count = [self.dataSource numberOfControllersInPageController];
     self.contentView.contentSize = CGSizeMake(count * self.width, self.contentView.frame.size.height);
     self.currentIndex = 0;
-     [self.slideBar selectTabAtIndex:self.currentIndex];
+    [self.slideBar selectTabAtIndex:self.currentIndex];
     UIViewController *controller = [self configControllerAtIndex:self.currentIndex];
     if (controller) {
         self.currentController = controller;
@@ -98,7 +100,7 @@
     if (!controller) {
         return nil;
     }
-//    NSLog(@"正在配置index 为 %ld 的controller",index);
+    NSLog(@"正在配置index 为 %ld 的controller",index);
     CGRect rect = CGRectMake(index * self.width, 0, self.width, self.contentView.frame.size.height);
     if (!controller.parentViewController) {
         [self addChildViewController:controller];
@@ -107,6 +109,8 @@
         [self saveController:controller atIndex:index];
     }
     controller.view.frame = rect;
+    NSLog(@"controller 地址是 %@",controller);
+    NSLog(@"rect x 在 === %f",rect.origin.x);
     return controller;
 }
 
@@ -129,19 +133,24 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat curControllerOffset = self.currentIndex * self.width;
+    if (!self.isInteractionScroll) {
+        return;
+    }
     if (scrollView.contentOffset.x < 0) {
         return;
     }
-    NSInteger page = scrollView.contentOffset.x / self.width;
+    NSInteger nextPage = self.currentController.view.frame.origin.x / self.width;
 
-    if (scrollView.contentOffset.x > curControllerOffset) {
-        //right
-        [self willDraggingToNextController:page+1];
-    }else if (scrollView.contentOffset.x < curControllerOffset) {
-        //left
-        [self willDraggingToNextController:page];
+    if (scrollView.contentOffset.x - self.lastOffsetX > 0) {
+        nextPage ++;
+    }else{
+        nextPage --;
     }
+    self.lastOffsetX = scrollView.contentOffset.x;
+    
+    NSLog(@"page == %ld",nextPage);
+    
+    [self willDraggingToNextController:nextPage];
 }
 
 - (void)willDraggingToNextController:(NSInteger)nextIndex{
@@ -153,23 +162,27 @@
     if (nextController) {
         self.nextController = nextController;
         self.nextIndex = nextIndex;
+        NSLog(@"nextIndex == %ld",self.nextIndex);
     }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
-}
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    NSInteger page = scrollView.contentOffset.x / self.width;
-    self.currentIndex = page;
+    self.currentIndex = self.nextIndex;
     self.currentController = self.nextController;
     [self.slideBar selectTabAtIndex:self.currentIndex];
+    NSLog(@"currentIndex == %ld",self.currentIndex);
+    self.isInteractionScroll = NO;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.isInteractionScroll = YES;
+}
 
-
-
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        self.isInteractionScroll = NO;
+    }
+}
 
 
 @end
