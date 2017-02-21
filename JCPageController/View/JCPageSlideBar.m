@@ -7,21 +7,14 @@
 //
 
 #import "JCPageSlideBar.h"
-#import "JCPageSlideBarDataSource.h"
-#import "JCPageSlideBarItem.h"
+#import "JCPageSlideBarCell.h"
 
-@interface JCPageSlideBar() <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface JCPageSlideBar() <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @end
 
 @implementation JCPageSlideBar
 
-
-- (void)setDataSource:(JCPageSlideBarDataSource *)dataSource{
-    _dataSource = dataSource;
-    self.collectionView.dataSource = dataSource;
-    [self.collectionView reloadData];
-}
 
 - (UICollectionViewFlowLayout *)colletionViewLayout{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -37,8 +30,10 @@
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:self.colletionViewLayout];
         _collectionView.delegate = self;
+        _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
+        [_collectionView registerClass:[JCPageSlideBarCell class] forCellWithReuseIdentifier:@"JCPageSlideBarCell"];
         [self addSubview:_collectionView];
         
         CALayer *line = [CALayer layer];
@@ -49,12 +44,27 @@
     return _collectionView;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < self.dataSource.items.count) {
-        JCPageSlideBarItem *item = [self.dataSource.items objectAtIndex:indexPath.row];
-        return CGSizeMake(item.width, self.frame.size.height);
+- (void)reloadData{
+    [self.collectionView reloadData];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.dataSource numberOfControllersInPageController];
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    JCPageSlideBarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCPageSlideBarCell" forIndexPath:indexPath];
+    NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:indexPath.row];
+    if (!title) {
+        title = @"";
     }
-    return CGSizeMake(44, self.frame.size.height);
+    cell.text = title;
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat width = [self.dataSource pageContoller:_controller widthForCellAtIndex:indexPath.row];
+    return CGSizeMake(width, self.frame.size.height);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -66,7 +76,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
 }
 
 @end

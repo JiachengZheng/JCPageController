@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class JCPageSlideBarItem;
-@class JCPageSlideBarDataSource;
+#import "JCPageContoller.h"
+
+@class JCPageContoller;
 
 @interface JCPageSlideBar : UIView
-@property (nonatomic, strong) JCPageSlideBarDataSource *dataSource;
 
+@property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
+@property (nonatomic, weak) JCPageContoller *controller;
+
+- (void)reloadData;
 @end

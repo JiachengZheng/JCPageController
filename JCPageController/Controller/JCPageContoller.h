@@ -7,22 +7,53 @@
 //
 
 #import <UIKit/UIKit.h>
-@class JCPageSlideBarItem;
+@class JCPageContoller;
 
-@protocol JCPageContollerDelegate <NSObject>
+@protocol JCPageContollerDataSource <NSObject>
 
 @required
 
-- (UIViewController<JCPageContollerDelegate> *)pageForRowByItem:(JCPageSlideBarItem *)item;
+// return number of subControllers
+- (NSInteger)numberOfControllersInPageController;
 
-- (UIViewController<JCPageContollerDelegate> *)dequeueReusablePageWithItem:(JCPageSlideBarItem *)item;
+// return each viewController
+- (UIViewController *)pageContoller:(JCPageContoller *)pageContoller controllerAtIndex:(NSInteger)index;
+
+// return each bar width
+- (CGFloat)pageContoller:(JCPageContoller *)pageContoller widthForCellAtIndex:(NSInteger)index;
+
+// return each controller reuse identifier
+- (NSString *)reuseIdentifierForControllerAtIndex:(NSInteger)index;
+
+@optional
+
+// return each bar title
+- (NSString *)pageContoller:(JCPageContoller *)pageContoller titleForCellAtIndex:(NSInteger)index;
 
 @optional
 
 @end
 
-@interface JCPageContoller : UIViewController <JCPageContollerDelegate>
+@protocol JCPageContollerDelegate <NSObject>
 
-@property (nonatomic, strong) NSArray<JCPageSlideBarItem *> *slideBarItems;
+@optional
+- (void)pageContoller:(JCPageContoller *)pageContoller didShowController:(UIViewController *)controller atIndex:(NSInteger)index;
+
+@end
+
+@interface JCPageContoller : UIViewController
+
+@property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
+@property (nonatomic, weak) id<JCPageContollerDelegate> delegate;
+
+- (void)reloadData;
+
+- (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier;
+
+
+
+
+
+
 
 @end

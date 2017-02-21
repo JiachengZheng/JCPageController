@@ -7,28 +7,21 @@
 //
 
 #import "JCPageSlideBarCell.h"
-#import "JCPageSlideBarItem.h"
 
 @interface JCPageSlideBarCell()
 @property (nonatomic, strong) UILabel *label;
 @end
 
 @implementation JCPageSlideBarCell
-{
-    JCPageSlideBarItem *_item;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
         self.clipsToBounds = YES;
+        self.contentView.backgroundColor = [UIColor whiteColor];
     }
     return self;
-}
-
-+ (NSString *)cellIdentifier{
-    return NSStringFromClass(self);
 }
 
 - (UILabel *)label{
@@ -38,23 +31,22 @@
         _label.font = [UIFont systemFontOfSize:13];
         _label.textColor = [UIColor blackColor];
         _label.textAlignment = NSTextAlignmentCenter;
-        _label.backgroundColor = [UIColor clearColor];
+        _label.backgroundColor = [UIColor whiteColor];
     }
     return  _label;
 }
 
-- (void)setObject:(id)item{
-    _item = item;
-    self.label.text = _item.text;
-    self.contentView.backgroundColor = [UIColor whiteColor];
+- (void)setText:(NSString *)text{
+    _text = text;
+    self.label.text = text;
 }
 
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];
     if (selected) {
-        _label.textColor = [UIColor redColor];
+        self.label.textColor = [UIColor redColor];
     }else{
-        _label.textColor = [UIColor blackColor];
+        self.label.textColor = [UIColor blackColor];
     }
 }
 @end

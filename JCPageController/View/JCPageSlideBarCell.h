@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface JCPageSlideBarCell : UICollectionViewCell
-
-+ (NSString *)cellIdentifier;
-
-- (void)setObject:(id)item;
+@property (nonatomic, copy) NSString *text;
 @end

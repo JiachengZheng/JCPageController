@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */; };
+		0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5311E5BDD4900F8236D /* Demo1Model.m */; };
+		0B47F5351E5C0A0400F8236D /* Demo1BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */; };
 		0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA711E4D84FD00C0E6C0 /* main.m */; };
 		0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */; };
 		0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA771E4D84FD00C0E6C0 /* ViewController.m */; };
@@ -15,13 +18,17 @@
 		0BF1BA801E4D84FD00C0E6C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF1BA7E1E4D84FD00C0E6C0 /* LaunchScreen.storyboard */; };
 		0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */; };
 		0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */; };
-		0BF1BA991E4D899600C0E6C0 /* JCPageSlideBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */; };
-		0BF1BA9C1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */; };
 		0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */; };
 		0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B47F52D1E5BDD3100F8236D /* Demo1PageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1PageController.h; sourceTree = "<group>"; };
+		0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1PageController.m; sourceTree = "<group>"; };
+		0B47F5301E5BDD4900F8236D /* Demo1Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1Model.h; sourceTree = "<group>"; };
+		0B47F5311E5BDD4900F8236D /* Demo1Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1Model.m; sourceTree = "<group>"; };
+		0B47F5331E5C0A0400F8236D /* Demo1BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1BarItem.h; sourceTree = "<group>"; };
+		0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1BarItem.m; sourceTree = "<group>"; };
 		0BF1BA6D1E4D84FD00C0E6C0 /* JCPageControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCPageControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF1BA711E4D84FD00C0E6C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0BF1BA731E4D84FD00C0E6C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,10 +43,6 @@
 		0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageContoller.m; sourceTree = "<group>"; };
 		0BF1BA931E4D897E00C0E6C0 /* JCPageSlideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBar.h; sourceTree = "<group>"; };
 		0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBar.m; sourceTree = "<group>"; };
-		0BF1BA971E4D899600C0E6C0 /* JCPageSlideBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarItem.h; sourceTree = "<group>"; };
-		0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarItem.m; sourceTree = "<group>"; };
-		0BF1BA9A1E4D945900C0E6C0 /* JCPageSlideBarDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarDataSource.h; sourceTree = "<group>"; };
-		0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarDataSource.m; sourceTree = "<group>"; };
 		0BF1BA9D1E4D999900C0E6C0 /* JCPageSlideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarCell.h; sourceTree = "<group>"; };
 		0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarCell.m; sourceTree = "<group>"; };
 		0BF1BAA71E509DB100C0E6C0 /* JCPageSlideContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideContentView.h; sourceTree = "<group>"; };
@@ -57,6 +60,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B47F5291E5BDCF600F8236D /* Demo1 */ = {
+			isa = PBXGroup;
+			children = (
+				0B47F52A1E5BDD1F00F8236D /* Controller */,
+				0B47F52B1E5BDD1F00F8236D /* Model */,
+				0B47F52C1E5BDD1F00F8236D /* View */,
+			);
+			path = Demo1;
+			sourceTree = "<group>";
+		};
+		0B47F52A1E5BDD1F00F8236D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0B47F52D1E5BDD3100F8236D /* Demo1PageController.h */,
+				0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0B47F52B1E5BDD1F00F8236D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B47F5301E5BDD4900F8236D /* Demo1Model.h */,
+				0B47F5311E5BDD4900F8236D /* Demo1Model.m */,
+				0B47F5331E5C0A0400F8236D /* Demo1BarItem.h */,
+				0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B47F52C1E5BDD1F00F8236D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0BF1BA641E4D84FD00C0E6C0 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +117,7 @@
 		0BF1BA6F1E4D84FD00C0E6C0 /* JCPageControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0B47F5291E5BDCF600F8236D /* Demo1 */,
 				0BF1BA731E4D84FD00C0E6C0 /* AppDelegate.h */,
 				0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */,
 				0BF1BA761E4D84FD00C0E6C0 /* ViewController.h */,
@@ -102,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				0BF1BA8E1E4D897E00C0E6C0 /* Controller */,
-				0BF1BA911E4D897E00C0E6C0 /* Model */,
 				0BF1BA921E4D897E00C0E6C0 /* View */,
 			);
 			path = JCPageController;
@@ -115,17 +155,6 @@
 				0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0BF1BA911E4D897E00C0E6C0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0BF1BA971E4D899600C0E6C0 /* JCPageSlideBarItem.h */,
-				0BF1BA981E4D899600C0E6C0 /* JCPageSlideBarItem.m */,
-				0BF1BA9A1E4D945900C0E6C0 /* JCPageSlideBarDataSource.h */,
-				0BF1BA9B1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0BF1BA921E4D897E00C0E6C0 /* View */ = {
@@ -213,13 +242,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */,
+				0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */,
 				0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */,
 				0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */,
 				0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */,
 				0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */,
-				0BF1BA991E4D899600C0E6C0 /* JCPageSlideBarItem.m in Sources */,
+				0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */,
 				0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */,
-				0BF1BA9C1E4D945900C0E6C0 /* JCPageSlideBarDataSource.m in Sources */,
+				0B47F5351E5C0A0400F8236D /* Demo1BarItem.m in Sources */,
 				0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +405,7 @@
 				0BF1BA861E4D84FD00C0E6C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
