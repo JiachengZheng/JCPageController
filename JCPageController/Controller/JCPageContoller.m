@@ -15,7 +15,6 @@
 @property (nonatomic, strong) JCPageSlideContentView *contentView;
 @property (nonatomic, strong) NSMutableDictionary *controllersMap;
 @property (nonatomic, strong) UIViewController *currentController;
-@property (nonatomic, strong) UIViewController *nextController;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSInteger nextIndex;
 @property (nonatomic, assign) CGFloat lastOffsetX;
@@ -81,13 +80,18 @@
     if (!identifier) {
         return;
     }
-    NSMutableSet *set = [self.controllersMap objectForKey:identifier];
-    if (set) {
-        [set addObject:controller];
-    }else{
-        NSMutableSet *set = [NSMutableSet setWithObjects:controller, nil];
-        [self.controllersMap setObject:set forKey:identifier];
+    NSString *key = [NSString stringWithFormat:@"%ld_%@",index,identifier];
+    [self.controllersMap setObject:controller forKey:key];
+}
+
+- (UIViewController *)getControllerFromMap:(NSInteger)index{
+    NSString *identifier = [self.dataSource reuseIdentifierForControllerAtIndex:index];
+    if (!identifier) {
+        return nil;
     }
+    NSString *key = [NSString stringWithFormat:@"%ld_%@",index,identifier];
+    UIViewController *vcl = [self.controllersMap objectForKey:key];
+    return vcl;
 }
 
 - (UIViewController *)configControllerAtIndex:(NSInteger)index{
@@ -95,88 +99,106 @@
     if (index >= count || index < 0) {
         return nil;
     }
-    
-    UIViewController *controller = [self.dataSource pageContoller:self controllerAtIndex:index];
-    if (!controller) {
-        return nil;
+    UIViewController *controller = [self getControllerFromMap:index];
+    if (!controller){
+        controller = [self.dataSource pageContoller:self controllerAtIndex:index];
+        if (!controller) {
+            return nil;
+        }
     }
-    NSLog(@"正在配置index 为 %ld 的controller",index);
     CGRect rect = CGRectMake(index * self.width, 0, self.width, self.contentView.frame.size.height);
     if (!controller.parentViewController) {
         [self addChildViewController:controller];
         [self.contentView addSubview:controller.view];
         [controller didMoveToParentViewController:self];
-        [self saveController:controller atIndex:index];
     }
+    [self saveController:controller atIndex:index];
     controller.view.frame = rect;
-    NSLog(@"controller 地址是 %@",controller);
-    NSLog(@"rect x 在 === %f",rect.origin.x);
     return controller;
 }
 
-- (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier{
+- (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index{
     if (!identifier) {
         return nil;
     }
-    NSMutableSet *set = [self.controllersMap objectForKey:identifier];
-    if (!set) {
+    NSInteger count = [self.dataSource numberOfControllersInPageController];
+    if (index >= count || index < 0) {
         return nil;
     }
     UIViewController *controller = nil;
-    for (UIViewController *obj in set) {
-        if (obj != self.currentController) {
-            controller = obj;
+    NSString *findKey = nil;
+    for (NSString *key in self.controllersMap) {
+        NSArray *components = [key componentsSeparatedByString:@"_"];
+        NSString *indexStr = components.firstObject;
+        NSString *identifierStr = components.lastObject;
+        NSInteger gap = labs(indexStr.integerValue - index);
+        if ([identifier isEqualToString:identifierStr] && gap > 1) {
+            controller = self.controllersMap[key];
+            findKey = key;
             break;
         }
+    }
+    if (findKey) {
+        [self.controllersMap removeObjectForKey:findKey];
     }
     return controller;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     if (!self.isInteractionScroll) {
         return;
     }
+    
     if (scrollView.contentOffset.x < 0) {
+        [self.slideBar selectTabAtIndex:0];
         return;
     }
-    NSInteger nextPage = self.currentController.view.frame.origin.x / self.width;
-
+    NSInteger page = scrollView.contentOffset.x / self.contentView.frame.size.width;
+    NSInteger nextPage = -1;
+    NSInteger totalCount = [self.dataSource numberOfControllersInPageController];
     if (scrollView.contentOffset.x - self.lastOffsetX > 0) {
-        nextPage ++;
+        if (scrollView.contentOffset.x <= self.currentController.view.frame.origin.x) {
+            return;
+        }
+        nextPage = page < totalCount - 1 ? page + 1 : totalCount - 1;
     }else{
-        nextPage --;
+        if (scrollView.contentOffset.x >= self.currentController.view.frame.origin.x) {
+            return;
+        }
+        page = page < totalCount - 1 ? page+1 : totalCount-1;
+        nextPage = page > 0 ? page - 1 : 0;
     }
     self.lastOffsetX = scrollView.contentOffset.x;
     
-    NSLog(@"page == %ld",nextPage);
-    
-    [self willDraggingToNextController:nextPage];
-}
-
-- (void)willDraggingToNextController:(NSInteger)nextIndex{
-    if (nextIndex == self.nextIndex) {
-        return;
+    if (self.currentIndex != page) {
+        self.currentIndex = page;
+        self.currentController = [self configControllerAtIndex:self.currentIndex];
+        [self.slideBar selectTabAtIndex:self.currentIndex];
     }
     
-    UIViewController *nextController = [self configControllerAtIndex:nextIndex];
-    if (nextController) {
-        self.nextController = nextController;
-        self.nextIndex = nextIndex;
-        NSLog(@"nextIndex == %ld",self.nextIndex);
+    if (self.nextIndex != nextPage) {
+        [self willDraggingToNextController:nextPage];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    self.currentIndex = self.nextIndex;
-    self.currentController = self.nextController;
-    [self.slideBar selectTabAtIndex:self.currentIndex];
-    NSLog(@"currentIndex == %ld",self.currentIndex);
+    NSInteger page = scrollView.contentOffset.x / self.contentView.frame.size.width;
+    [self.slideBar selectTabAtIndex:page];
     self.isInteractionScroll = NO;
+}
+
+- (void)willDraggingToNextController:(NSInteger)nextIndex{
+    UIViewController *nextController = [self configControllerAtIndex:nextIndex];
+    if (nextController) {
+        self.nextIndex = nextIndex;
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.isInteractionScroll = YES;
 }
+
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {

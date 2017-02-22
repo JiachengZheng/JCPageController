@@ -48,7 +48,7 @@
 
 - (void)reloadData;
 
-- (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier;
+- (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index;
 
 
 

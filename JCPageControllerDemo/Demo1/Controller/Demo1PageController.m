@@ -52,7 +52,7 @@
 
 - (NSString *)reuseIdentifierForControllerAtIndex:(NSInteger)index;{
     Demo1BarItem *item = self.model.barItems[index];
-    return @"1";//item.identifier;
+    return item.identifier;
 }
 
 - (UIViewController *)testController{
@@ -68,7 +68,7 @@
 
 - (UIViewController *)pageContoller:(JCPageContoller *)pageContoller controllerAtIndex:(NSInteger)index{
     Demo1BarItem *item = self.model.barItems[index];
-    UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:@"1"];
+    UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:item.identifier atIndex:index];
     if (!controller) {
         controller = self.testController;
     }
