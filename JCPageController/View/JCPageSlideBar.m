@@ -104,7 +104,7 @@
 }
 
 - (void)animateLineWithStretch:(NSInteger)index{
-    
+    [self animateLineWithDynamicWidth:index width:23];
 }
 
 - (void)reloadData{

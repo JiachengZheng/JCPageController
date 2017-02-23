@@ -1,5 +1,5 @@
 //
-//  Demo1BarItem.h
+//  DemoBarItem.h
 //  JCPageControllerDemo
 //
 //  Created by zhengjiacheng on 2017/2/21.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@interface Demo1BarItem : NSObject
+@interface DemoBarItem : NSObject
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, assign) CGFloat width;
 @property (nonatomic, copy) NSString *identifier;

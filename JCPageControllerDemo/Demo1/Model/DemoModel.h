@@ -1,5 +1,5 @@
 //
-//  Demo1Model.h
+//  DemoModel.h
 //  JCPageControllerDemo
 //
 //  Created by zhengjiacheng on 2017/2/21.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Demo1Model : NSObject
+@interface DemoModel : NSObject
 
 @property (nonatomic, strong) NSArray *barItems;
 

@@ -1,31 +1,31 @@
 //
-//  Demo1PageController.m
+//  DemoPageController.m
 //  JCPageControllerDemo
 //
 //  Created by zhengjiacheng on 2017/2/21.
 //  Copyright © 2017年 ZhengJiacheng. All rights reserved.
 //
 
-#import "Demo1PageController.h"
-#import "Demo1Model.h"
-#import "Demo1BarItem.h"
+#import "DemoPageController.h"
+#import "DemoModel.h"
+#import "DemoBarItem.h"
 
 #import "TestViewController.h"
 
 #define kRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
 
-@interface Demo1PageController () <JCPageContollerDataSource, JCPageContollerDelegate>
-@property (nonatomic, strong) Demo1Model *model;
+@interface DemoPageController () <JCPageContollerDataSource, JCPageContollerDelegate>
+@property (nonatomic, strong) DemoModel *model;
 @property (nonatomic, strong) JCPageContoller *pageController;
 @end
 
-@implementation Demo1PageController
+@implementation DemoPageController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.model = [Demo1Model new];
+    self.model = [DemoModel new];
     CGRect rect = self.view.bounds;
     rect.origin.y = 64;
     rect.size.height = rect.size.height - 64;
@@ -59,7 +59,7 @@
 }
 
 - (NSString *)reuseIdentifierForControllerAtIndex:(NSInteger)index;{
-    Demo1BarItem *item = self.model.barItems[index];
+    DemoBarItem *item = self.model.barItems[index];
     return item.identifier;
 }
 
@@ -67,7 +67,7 @@
     TestViewController *testController = [[TestViewController alloc]init];
     UILabel *label = [[UILabel alloc]initWithFrame:testController.view.bounds];
     [testController.view addSubview:label];
-    label.font = [UIFont systemFontOfSize:20];
+    label.font = [UIFont systemFontOfSize:18];
     testController.view.backgroundColor = kRandomColor;
     label.tag = 2000;
     label.textAlignment = NSTextAlignmentCenter;
@@ -75,7 +75,7 @@
 }
 
 - (UIViewController *)pageContoller:(JCPageContoller *)pageContoller controllerAtIndex:(NSInteger)index{
-    Demo1BarItem *item = self.model.barItems[index];
+    DemoBarItem *item = self.model.barItems[index];
     UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:item.identifier atIndex:index];
     if (!controller) {
         controller = self.testController;
@@ -86,12 +86,12 @@
 }
 
 - (CGFloat)pageContoller:(JCPageContoller *)pageContoller widthForCellAtIndex:(NSInteger )index{
-    Demo1BarItem *item = self.model.barItems[index];
+    DemoBarItem *item = self.model.barItems[index];
     return item.width;
 }
 
 - (NSString *)pageContoller:(JCPageContoller *)pageContoller titleForCellAtIndex:(NSInteger)index{
-    Demo1BarItem *item = self.model.barItems[index];
+    DemoBarItem *item = self.model.barItems[index];
     return item.text;
 }
 

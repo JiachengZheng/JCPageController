@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "JCPageContoller.h"
-#import "Demo1PageController.h"
+#import "DemoPageController.h"
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -46,7 +46,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    Demo1PageController *pageController = [mainStoryboard instantiateViewControllerWithIdentifier:@"Demo1PageController"];
+    DemoPageController *pageController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DemoPageController"];
     NSString *title = @"";
     if (indexPath.row == 0) {
         title = @"固定宽度，不重用";

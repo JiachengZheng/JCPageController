@@ -1,20 +1,20 @@
 //
-//  Demo1Model.m
+//  DemoModel.m
 //  JCPageControllerDemo
 //
 //  Created by zhengjiacheng on 2017/2/21.
 //  Copyright © 2017年 ZhengJiacheng. All rights reserved.
 //
 
-#import "Demo1Model.h"
-#import "Demo1BarItem.h"
-@implementation Demo1Model
+#import "DemoModel.h"
+#import "DemoBarItem.h"
+@implementation DemoModel
 - (void)loadItems:(NSDictionary *)params completion:(void (^)(NSDictionary *))completion{
     NSNumber *needReuse = params[@"needReuse"];
     NSArray *titleArr = @[@"精选",@"男装",@"鞋",@"数码产品",@"儿童装",@"文娱文娱用品",@"我是标题",@"我是很长的标题"];
     NSMutableArray *mutableArr = [NSMutableArray array];
     for (NSInteger i = 0; i < titleArr.count; i++) {
-        Demo1BarItem *item = [Demo1BarItem new];
+        DemoBarItem *item = [DemoBarItem new];
         item.text = titleArr[i];
         item.width = [self boundingSizeWithString:item.text font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width + 30 ;
         item.identifier = [NSString stringWithFormat:@"id%ld",i];

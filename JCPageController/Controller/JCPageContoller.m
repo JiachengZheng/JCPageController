@@ -246,7 +246,9 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
-    [self.slideBar moveBottomLineToIndex:self.currentIndex];
+    if (self.lineAinimationType != JCSlideBarLineAnimationStretch) {
+        [self.slideBar moveBottomLineToIndex:self.currentIndex];
+    }
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 

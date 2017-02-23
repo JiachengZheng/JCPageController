@@ -13,7 +13,6 @@
 @protocol JCPageSlideBarDelegate <NSObject>
 @optional
 - (void)pageSlideBar:(JCPageSlideBar *)pageSlideBar didSelectBarAtIndex:(NSInteger)index;
-
 @end
 
 @interface JCPageSlideBar : UIView
@@ -28,4 +27,5 @@
 - (void)moveBottomLineToIndex:(NSInteger)index;
 
 - (void)reloadData;
+
 @end

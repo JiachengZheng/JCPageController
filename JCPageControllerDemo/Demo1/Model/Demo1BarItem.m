@@ -1,13 +1,13 @@
 //
-//  Demo1BarItem.m
+//  DemoBarItem.m
 //  JCPageControllerDemo
 //
 //  Created by zhengjiacheng on 2017/2/21.
 //  Copyright © 2017年 ZhengJiacheng. All rights reserved.
 //
 
-#import "Demo1BarItem.h"
+#import "DemoBarItem.h"
 
-@implementation Demo1BarItem
+@implementation DemoBarItem
 
 @end

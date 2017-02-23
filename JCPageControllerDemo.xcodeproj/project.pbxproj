@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */; };
-		0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5311E5BDD4900F8236D /* Demo1Model.m */; };
+		0B47F52F1E5BDD3100F8236D /* DemoPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F52E1E5BDD3100F8236D /* DemoPageController.m */; };
+		0B47F5321E5BDD4900F8236D /* DemoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5311E5BDD4900F8236D /* DemoModel.m */; };
 		0B47F5351E5C0A0400F8236D /* Demo1BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */; };
 		0B47F5441E5EB4B200F8236D /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5431E5EB4B200F8236D /* TestViewController.m */; };
 		0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA711E4D84FD00C0E6C0 /* main.m */; };
@@ -23,11 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B47F52D1E5BDD3100F8236D /* Demo1PageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1PageController.h; sourceTree = "<group>"; };
-		0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1PageController.m; sourceTree = "<group>"; };
-		0B47F5301E5BDD4900F8236D /* Demo1Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1Model.h; sourceTree = "<group>"; };
-		0B47F5311E5BDD4900F8236D /* Demo1Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1Model.m; sourceTree = "<group>"; };
-		0B47F5331E5C0A0400F8236D /* Demo1BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1BarItem.h; sourceTree = "<group>"; };
+		0B47F52D1E5BDD3100F8236D /* DemoPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoPageController.h; sourceTree = "<group>"; };
+		0B47F52E1E5BDD3100F8236D /* DemoPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoPageController.m; sourceTree = "<group>"; };
+		0B47F5301E5BDD4900F8236D /* DemoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModel.h; sourceTree = "<group>"; };
+		0B47F5311E5BDD4900F8236D /* DemoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoModel.m; sourceTree = "<group>"; };
+		0B47F5331E5C0A0400F8236D /* DemoBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoBarItem.h; sourceTree = "<group>"; };
 		0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1BarItem.m; sourceTree = "<group>"; };
 		0B47F5421E5EB4B200F8236D /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		0B47F5431E5EB4B200F8236D /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
@@ -72,8 +72,8 @@
 		0B47F52A1E5BDD1F00F8236D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0B47F52D1E5BDD3100F8236D /* Demo1PageController.h */,
-				0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */,
+				0B47F52D1E5BDD3100F8236D /* DemoPageController.h */,
+				0B47F52E1E5BDD3100F8236D /* DemoPageController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -81,9 +81,9 @@
 		0B47F52B1E5BDD1F00F8236D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0B47F5301E5BDD4900F8236D /* Demo1Model.h */,
-				0B47F5311E5BDD4900F8236D /* Demo1Model.m */,
-				0B47F5331E5C0A0400F8236D /* Demo1BarItem.h */,
+				0B47F5301E5BDD4900F8236D /* DemoModel.h */,
+				0B47F5311E5BDD4900F8236D /* DemoModel.m */,
+				0B47F5331E5C0A0400F8236D /* DemoBarItem.h */,
 				0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */,
 			);
 			path = Model;
@@ -235,12 +235,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */,
-				0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */,
+				0B47F52F1E5BDD3100F8236D /* DemoPageController.m in Sources */,
 				0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */,
 				0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */,
 				0B47F5441E5EB4B200F8236D /* TestViewController.m in Sources */,
 				0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */,
-				0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */,
+				0B47F5321E5BDD4900F8236D /* DemoModel.m in Sources */,
 				0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */,
 				0B47F5351E5C0A0400F8236D /* Demo1BarItem.m in Sources */,
 				0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */,

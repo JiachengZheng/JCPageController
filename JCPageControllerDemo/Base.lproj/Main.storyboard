@@ -85,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="833" y="113"/>
         </scene>
-        <!--Demo1 Page Controller-->
+        <!--Demo Page Controller-->
         <scene sceneID="gHO-sL-vgc">
             <objects>
-                <viewController storyboardIdentifier="Demo1PageController" automaticallyAdjustsScrollViewInsets="NO" id="uGv-zt-jG4" customClass="Demo1PageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DemoPageController" automaticallyAdjustsScrollViewInsets="NO" id="uGv-zt-jG4" customClass="DemoPageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yo6-tY-gGs"/>
                         <viewControllerLayoutGuide type="bottom" id="vS1-Ex-EYl"/>
