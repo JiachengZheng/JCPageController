@@ -74,7 +74,9 @@
     NSInteger count = [self.dataSource numberOfControllersInPageController];
     self.contentView.contentSize = CGSizeMake(count * self.width, self.contentView.frame.size.height);
     [self.slideBar reloadData];
+    self.slideBar.lineAinimationType = self.lineAinimationType;
     self.currentIndex = 0;
+    [self.slideBar moveBottomLineToIndex:self.currentIndex];
     [self.slideBar selectTabAtIndex:self.currentIndex];
     self.currentController = [self configControllerAtIndex:self.currentIndex];
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
@@ -161,6 +163,10 @@
             [controller performSelector:@selector(prepareForReuse)];
         }
         [self.controllersMap removeObjectForKey:findKey];
+    }else{
+        if ([self getControllerFromMap:index]) {
+            controller = [self getControllerFromMap:index];
+        }
     }
     return controller;
 }
@@ -240,6 +246,7 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
+    [self.slideBar moveBottomLineToIndex:self.currentIndex];
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
@@ -257,6 +264,7 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
+    [self.slideBar moveBottomLineToIndex:self.currentIndex];
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 

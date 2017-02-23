@@ -11,17 +11,10 @@
 
 @interface JCPageSlideBar() <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UIView *line;
 @end
 
 @implementation JCPageSlideBar
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-    }
-    return self;
-}
 
 - (UICollectionViewFlowLayout *)colletionViewLayout{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -31,6 +24,16 @@
     layout.itemSize = CGSizeMake(44, self.frame.size.height);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     return layout;
+}
+
+- (UIView *)line{
+    if (!_line) {
+        CGFloat height = 2;
+        _line = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height - height, 23, height)];
+        [self.collectionView addSubview:_line];
+        _line.backgroundColor = [UIColor redColor];
+    }
+    return _line;
 }
 
 - (UICollectionView *)collectionView{
@@ -57,6 +60,53 @@
     [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
+- (void)moveBottomLineToIndex:(NSInteger)index{
+    switch (self.lineAinimationType) {
+        case JCSlideBarLineAnimationFixedWidth:
+            [self animateLineWithDynamicWidth:index width:23];
+            break;
+        case JCSlideBarLineAnimationDynamicWidth:{
+            NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
+            CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+            [self animateLineWithDynamicWidth:index width:width];}
+            break;
+        case JCSlideBarLineAnimationStretch:
+            [self animateLineWithStretch:index];
+            break;
+    }
+}
+
+- (CGRect)cellFrameAtIndex:(NSInteger)index{
+    if (index >= [self.dataSource numberOfControllersInPageController]) {
+        return CGRectZero;
+    }
+    UICollectionViewLayoutAttributes * cellAttrs = [self.collectionView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    return cellAttrs.frame;
+}
+
+- (void)animateLineWithDynamicWidth:(NSInteger)index width:(CGFloat)width{
+
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    CGRect cellRect = [self cellFrameAtIndex:index];
+    if (!cell) {
+        CGFloat width = [self.dataSource pageContoller:_controller widthForCellAtIndex:0];
+        cellRect.size.width = width;
+        cellRect.origin.x = 0;
+        cellRect.origin.y = 0;
+        cellRect.size.height = self.frame.size.height;
+    }
+    [UIView animateWithDuration:0.16 animations:^{
+        CGRect rect = self.line.frame;
+        rect.size.width = width;
+        self.line.frame = rect;
+        self.line.center = CGPointMake(cellRect.origin.x + cellRect.size.width/2, self.line.center.y);
+    }];
+}
+
+- (void)animateLineWithStretch:(NSInteger)index{
+    
+}
+
 - (void)reloadData{
     [self.collectionView reloadData];
 }
@@ -79,7 +129,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat width = [self.dataSource pageContoller:_controller widthForCellAtIndex:indexPath.row];
-    return CGSizeMake(width, 40);
+    return CGSizeMake(width, self.frame.size.height);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -94,6 +144,24 @@
     [self.delegate pageSlideBar:self didSelectBarAtIndex:indexPath.row];
 }
 
-
+#pragma mark
+#pragma mark -- boundingSizeWithString
+- (CGSize)boundingSizeWithString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size{
+    CGSize textSize = CGSizeZero;
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0)
+    if (![string respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        // below ios7
+        textSize = [string sizeWithFont:font
+                      constrainedToSize:size
+                          lineBreakMode:NSLineBreakByWordWrapping];
+    }else
+#endif
+    {
+        //iOS 7
+        CGRect frame = [string boundingRectWithSize:size options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{ NSFontAttributeName:font } context:nil];
+        textSize = CGSizeMake(frame.size.width, frame.size.height + 1);
+    }
+    return textSize;
+}
 
 @end

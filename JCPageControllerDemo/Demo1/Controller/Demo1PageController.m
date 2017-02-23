@@ -9,7 +9,7 @@
 #import "Demo1PageController.h"
 #import "Demo1Model.h"
 #import "Demo1BarItem.h"
-#import "JCPageContoller.h"
+
 #import "TestViewController.h"
 
 #define kRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
@@ -36,7 +36,8 @@
 
 - (void)loadItems{
     __weak typeof(self) instance = self;
-    [self.model loadItems:nil completion:^(NSDictionary *dic) {
+    NSDictionary *dic = @{@"needReuse":@(self.needReuse)};
+    [self.model loadItems:dic completion:^(NSDictionary *dic) {
         [instance.pageController reloadData];
     }];
 }
@@ -45,6 +46,7 @@
     if (!_pageController) {
         _pageController = [[JCPageContoller alloc]init];
         _pageController.delegate = self;
+        _pageController.lineAinimationType = self.lineAinimationType;
         _pageController.dataSource = self;
         [self addChildViewController:_pageController];
         [self.view addSubview:_pageController.view];
@@ -65,7 +67,7 @@
     TestViewController *testController = [[TestViewController alloc]init];
     UILabel *label = [[UILabel alloc]initWithFrame:testController.view.bounds];
     [testController.view addSubview:label];
-    label.font = [UIFont systemFontOfSize:19];
+    label.font = [UIFont systemFontOfSize:20];
     testController.view.backgroundColor = kRandomColor;
     label.tag = 2000;
     label.textAlignment = NSTextAlignmentCenter;
@@ -79,8 +81,7 @@
         controller = self.testController;
     }
     UILabel *label = [controller.view viewWithTag:2000];
-    label.text = [NSString stringWithFormat:@"page%ld",index];
-    NSLog(@"page %ld 重新刷新",index);
+    label.text = item.text;
     return controller;
 }
 
@@ -95,7 +96,7 @@
 }
 
 - (void)pageContoller:(JCPageContoller *)pageContoller didShowController:(UIViewController *)controller atIndex:(NSInteger)index{
-    NSLog(@"page %ld did show",index);
+//    NSLog(@"page %ld did show",index);
 }
 
 @end

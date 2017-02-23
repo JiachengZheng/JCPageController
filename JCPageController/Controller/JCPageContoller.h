@@ -10,6 +10,12 @@
 
 @class JCPageContoller;
 
+typedef NS_ENUM(NSUInteger, JCSlideBarLineAnimationType) {
+    JCSlideBarLineAnimationFixedWidth,       //固定宽度
+    JCSlideBarLineAnimationDynamicWidth,     //动态宽度，与标题文字等宽
+    JCSlideBarLineAnimationStretch,          //拉伸效果
+};
+
 @protocol JCPageContollerDataSource <NSObject>
 
 @required
@@ -49,6 +55,8 @@
  *
  */
 @interface JCPageContoller : UIViewController
+
+@property (nonatomic, assign) JCSlideBarLineAnimationType lineAinimationType;
 
 @property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
 @property (nonatomic, weak) id<JCPageContollerDelegate> delegate;

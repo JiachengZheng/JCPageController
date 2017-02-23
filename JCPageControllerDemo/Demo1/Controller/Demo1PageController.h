@@ -7,7 +7,10 @@
 //
 
 #import "JCPageContoller.h"
-
+#import "JCPageContoller.h"
 @interface Demo1PageController : UIViewController
+
+@property (nonatomic, assign) JCSlideBarLineAnimationType lineAinimationType;
+@property (nonatomic) BOOL needReuse;
 
 @end

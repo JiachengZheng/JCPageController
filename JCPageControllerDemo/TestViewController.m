@@ -17,12 +17,10 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSLog(@"%@，viewDidAppear",self);
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    NSLog(@"%@，viewDidDisappear",self);
 }
 
 - (void)viewDidLoad {
@@ -32,7 +30,7 @@
 
 - (void)prepareForReuse{
     //重用
-    NSLog(@"%@ 执行 prepareForReuse",self);
+//    NSLog(@"%@ 执行 prepareForReuse",self);
 }
 
 - (void)didReceiveMemoryWarning {

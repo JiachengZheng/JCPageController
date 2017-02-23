@@ -18,11 +18,14 @@
 
 @interface JCPageSlideBar : UIView
 
+@property (nonatomic, assign) JCSlideBarLineAnimationType lineAinimationType;
 @property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
 @property (nonatomic, weak) id<JCPageSlideBarDelegate> delegate;
 @property (nonatomic, weak) JCPageContoller *controller;
 
 - (void)selectTabAtIndex:(NSInteger)index;
+
+- (void)moveBottomLineToIndex:(NSInteger)index;
 
 - (void)reloadData;
 @end
