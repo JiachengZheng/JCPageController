@@ -19,7 +19,6 @@
 		0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA901E4D897E00C0E6C0 /* JCPageContoller.m */; };
 		0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */; };
 		0BF1BA9F1E4D999900C0E6C0 /* JCPageSlideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */; };
-		0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +44,6 @@
 		0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBar.m; sourceTree = "<group>"; };
 		0BF1BA9D1E4D999900C0E6C0 /* JCPageSlideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideBarCell.h; sourceTree = "<group>"; };
 		0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideBarCell.m; sourceTree = "<group>"; };
-		0BF1BAA71E509DB100C0E6C0 /* JCPageSlideContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPageSlideContentView.h; sourceTree = "<group>"; };
-		0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPageSlideContentView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +161,6 @@
 				0BF1BA941E4D897E00C0E6C0 /* JCPageSlideBar.m */,
 				0BF1BA9D1E4D999900C0E6C0 /* JCPageSlideBarCell.h */,
 				0BF1BA9E1E4D999900C0E6C0 /* JCPageSlideBarCell.m */,
-				0BF1BAA71E509DB100C0E6C0 /* JCPageSlideContentView.h */,
-				0BF1BAA81E509DB100C0E6C0 /* JCPageSlideContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,7 +240,6 @@
 				0BF1BA961E4D897E00C0E6C0 /* JCPageSlideBar.m in Sources */,
 				0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */,
 				0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */,
-				0BF1BAA91E509DB100C0E6C0 /* JCPageSlideContentView.m in Sources */,
 				0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */,
 				0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */,
 				0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */,

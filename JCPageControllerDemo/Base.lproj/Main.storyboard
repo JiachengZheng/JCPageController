@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OpF-tQ-vdx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oRx-MH-5UB" sceneMemberID="viewController">
+                <navigationController id="oRx-MH-5UB" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H3Z-N4-3eL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -39,14 +38,14 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pRF-5U-txr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normalCell" id="1eb-45-Qrp">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1eb-45-Qrp" id="TlK-VE-xki">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -89,7 +88,7 @@
         <!--Demo1 Page Controller-->
         <scene sceneID="gHO-sL-vgc">
             <objects>
-                <viewController storyboardIdentifier="Demo1PageController" id="uGv-zt-jG4" customClass="Demo1PageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Demo1PageController" automaticallyAdjustsScrollViewInsets="NO" id="uGv-zt-jG4" customClass="Demo1PageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yo6-tY-gGs"/>
                         <viewControllerLayoutGuide type="bottom" id="vS1-Ex-EYl"/>

@@ -15,6 +15,13 @@
 
 @implementation JCPageSlideBar
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
+}
 
 - (UICollectionViewFlowLayout *)colletionViewLayout{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
@@ -29,7 +36,9 @@
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:self.colletionViewLayout];
+        [_collectionView setContentInset:UIEdgeInsetsZero];
         _collectionView.delegate = self;
+        _collectionView.scrollsToTop = NO;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
@@ -52,6 +61,8 @@
     [self.collectionView reloadData];
 }
 
+#pragma mark
+#pragma mark -- UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [self.dataSource numberOfControllersInPageController];
 }
@@ -68,7 +79,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat width = [self.dataSource pageContoller:_controller widthForCellAtIndex:indexPath.row];
-    return CGSizeMake(width, self.frame.size.height);
+    return CGSizeMake(width, 40);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -80,6 +91,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    [self.delegate pageSlideBar:self didSelectBarAtIndex:indexPath.row];
 }
+
+
 
 @end

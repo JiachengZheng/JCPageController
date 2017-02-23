@@ -15,7 +15,7 @@
         Demo1BarItem *item = [Demo1BarItem new];
         item.text = [NSString stringWithFormat:@"item%ld",i];
         item.width = random()%50 + 70 ;
-        item.identifier = i % 2 ? @"id1" : @"id2";
+        item.identifier = @"id";//i % 2 ? @"id1" : @"id2";
         [mutableArr addObject:item];
     }
     self.barItems = mutableArr;

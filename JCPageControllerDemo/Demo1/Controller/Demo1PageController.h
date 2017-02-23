@@ -8,6 +8,6 @@
 
 #import "JCPageContoller.h"
 
-@interface Demo1PageController : JCPageContoller
+@interface Demo1PageController : UIViewController
 
 @end

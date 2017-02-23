@@ -22,8 +22,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.model = [Demo1Model new];
-    self.pageController.view.frame = self.view.bounds;
+    CGRect rect = self.view.bounds;
+    rect.origin.y = 64;
+    rect.size.height = rect.size.height - 64;
+    self.pageController.view.frame = rect;
     [self loadItems];
     // Do any additional setup after loading the view.
 }
@@ -74,6 +79,7 @@
     }
     UILabel *label = [controller.view viewWithTag:2000];
     label.text = [NSString stringWithFormat:@"page%ld",index];
+    NSLog(@"page %ld 重新刷新",index);
     return controller;
 }
 
