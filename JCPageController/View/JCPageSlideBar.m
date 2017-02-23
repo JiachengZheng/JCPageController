@@ -71,7 +71,7 @@
             [self animateLineWithDynamicWidth:index width:width];}
             break;
         case JCSlideBarLineAnimationStretch:
-            [self animateLineWithStretch:index];
+            [self animateLineWithDynamicWidth:index width:23];
             break;
     }
 }
@@ -103,8 +103,8 @@
     }];
 }
 
-- (void)animateLineWithStretch:(NSInteger)index{
-    [self animateLineWithDynamicWidth:index width:23];
+- (void)stretchBottomLineToIndex:(NSInteger)index progress:(CGFloat)progress{
+    NSLog(@"progress  ==  %f",progress);
 }
 
 - (void)reloadData{

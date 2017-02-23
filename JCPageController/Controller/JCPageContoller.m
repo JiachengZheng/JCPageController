@@ -234,6 +234,17 @@
     if (needConfigNextPage && self.nextIndex != nextPage) {
         [self willDraggingToNextController:nextPage];
     }
+    
+    if (self.lineAinimationType == JCSlideBarLineAnimationStretch) {
+        [self stretchBottomLine];
+    }
+}
+
+- (void)stretchBottomLine{
+    if (self.currentIndex == self.nextIndex) {
+        return;
+    }
+    [self.slideBar stretchBottomLineToIndex:self.nextIndex progress:1];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
