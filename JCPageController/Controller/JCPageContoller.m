@@ -10,16 +10,19 @@
 #import "JCPageSlideBar.h"
 
 @interface JCPageContoller () <UIScrollViewDelegate, JCPageSlideBarDelegate>
+
 @property (nonatomic, strong) JCPageSlideBar *slideBar;
-@property (nonatomic, strong) UIScrollView *contentView;
-@property (nonatomic, strong) NSMutableDictionary *controllersMap;
+@property (nonatomic, strong) UIScrollView *contentView;           //controllers 容器
+@property (nonatomic, strong) NSMutableDictionary *controllersMap; //用于保存controllers 用 @“index_identifier” 来当做key   value为controller
 @property (nonatomic, strong) UIViewController *currentController;
+@property (nonatomic, strong) UIViewController *nextController;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSInteger nextIndex;
-@property (nonatomic, assign) CGFloat lastOffsetX;
-@property (nonatomic) BOOL isInteractionScroll;
-@property (nonatomic) BOOL didSelectBarToChangePage;
-@property (nonatomic, assign) NSInteger selectBarIndex;
+@property (nonatomic, assign) CGFloat lastOffsetX; //记录上一次位移，用于判断滑动方向
+@property (nonatomic, assign) NSInteger selectBarIndex;  //记录用户点击的tabbar的索引，用于滚动结束后恢复页面真正位置
+@property (nonatomic) BOOL isInteractionScroll;  //是否是用户手势操作
+@property (nonatomic) BOOL didSelectBarToChangePage;  //用户点击了tabbar来切换页面
+
 @end
 
 @implementation JCPageContoller
@@ -73,10 +76,8 @@
     [self.slideBar reloadData];
     self.currentIndex = 0;
     [self.slideBar selectTabAtIndex:self.currentIndex];
-    UIViewController *controller = [self configControllerAtIndex:self.currentIndex];
-    if (controller) {
-        self.currentController = controller;
-    }
+    self.currentController = [self configControllerAtIndex:self.currentIndex];
+    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
 - (void)saveController:(UIViewController *)controller atIndex:(NSInteger)index{
@@ -87,6 +88,7 @@
     if (!identifier) {
         return;
     }
+    //用 @“index_identifier” 来当做key
     NSString *key = [NSString stringWithFormat:@"%ld_%@",index,identifier];
     [self.controllersMap setObject:controller forKey:key];
 }
@@ -106,12 +108,9 @@
     if (index >= count || index < 0) {
         return nil;
     }
-    UIViewController *controller = [self getControllerFromMap:index];
-    if (!controller){
-        controller = [self.dataSource pageContoller:self controllerAtIndex:index];
-        if (!controller) {
-            return nil;
-        }
+    UIViewController* controller = [self.dataSource pageContoller:self controllerAtIndex:index];
+    if (!controller) {
+        return nil;
     }
     CGRect rect = CGRectMake(index * self.width, 0, self.width, self.contentView.frame.size.height);
     if (!controller.parentViewController) {
@@ -158,6 +157,9 @@
         }
     }
     if (findKey) {
+        if ([controller respondsToSelector:@selector(prepareForReuse)]) {
+            [controller performSelector:@selector(prepareForReuse)];
+        }
         [self.controllersMap removeObjectForKey:findKey];
     }
     return controller;
@@ -167,6 +169,7 @@
     UIViewController *nextController = [self configControllerAtIndex:nextIndex];
     if (nextController) {
         self.nextIndex = nextIndex;
+        self.nextController = nextController;
     }
     return nextController;
 }
@@ -174,45 +177,61 @@
 #pragma mark
 #pragma mark -- UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+    CGFloat contentOffsetX = scrollView.contentOffset.x;
     if (!self.isInteractionScroll) {
         return;
     }
     
-    if (scrollView.contentOffset.x < 0) {
+    if (contentOffsetX < 0) {
         [self.slideBar selectTabAtIndex:0];
         return;
     }
     CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
-    NSInteger page = scrollView.contentOffset.x / self.contentView.frame.size.width;
+    NSInteger page = contentOffsetX / self.contentView.frame.size.width;
     NSInteger nextPage = -1;
     NSInteger totalCount = [self.dataSource numberOfControllersInPageController];
-    if (scrollView.contentOffset.x - self.lastOffsetX > 0) {
-        if (scrollView.contentOffset.x <= curControllerOriginX) {
+    
+    BOOL scrollToRight = YES;
+    if (contentOffsetX - self.lastOffsetX > 0) {
+        if (contentOffsetX <= curControllerOriginX) {
             return;
         }
+        //向右滑
         nextPage = page < totalCount - 1 ? page + 1 : totalCount - 1;
     }else{
-        if (scrollView.contentOffset.x >= curControllerOriginX) {
+        if (contentOffsetX >= curControllerOriginX) {
             return;
         }
+        //向坐滑
+        scrollToRight = NO;
         page = page < totalCount - 1 ? page+1 : totalCount-1;
         nextPage = page > 0 ? page - 1 : 0;
     }
-    self.lastOffsetX = scrollView.contentOffset.x;
+    self.lastOffsetX = contentOffsetX;
     
     if (self.currentIndex != page) {
         self.currentIndex = page;
-        self.currentController = [self configControllerAtIndex:self.currentIndex];
+        self.currentController = self.nextController;
         [self.slideBar selectTabAtIndex:self.currentIndex];
     }
+    BOOL needConfigNextPage = NO;
+    if (scrollToRight) {
+        if (contentOffsetX > self.currentIndex * self.contentView.frame.size.width) {
+            needConfigNextPage = YES;
+        }
+    }else{
+        if (contentOffsetX < self.currentIndex * self.contentView.frame.size.width) {
+            needConfigNextPage = YES;
+        }
+    }
     
-    if (self.nextIndex != nextPage) {
+    if (needConfigNextPage && self.nextIndex != nextPage) {
         [self willDraggingToNextController:nextPage];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //手势切换页面结束
     NSInteger page = scrollView.contentOffset.x / self.contentView.frame.size.width;
     [self.slideBar selectTabAtIndex:page];
     self.currentIndex = page;
@@ -221,10 +240,12 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
+    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     if (self.didSelectBarToChangePage) {
+        //点击tab 切换页面结束 恢复 self.currentController 真正位置
         self.didSelectBarToChangePage = NO;
         self.currentIndex = self.selectBarIndex;
         [self.slideBar selectTabAtIndex:self.currentIndex];
@@ -236,6 +257,7 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
+    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -259,6 +281,7 @@
         return;
     }
     if (self.isInteractionScroll) {
+        //正在手势滑动
         return;
     }
     self.didSelectBarToChangePage = YES;
@@ -266,7 +289,8 @@
     NSInteger realIndex = self.currentIndex < index ?  self.currentIndex + 1 : self.currentIndex - 1;
     UIViewController *nextVCL = [self willDraggingToNextController:index];
     if (nextVCL) {
-        self.contentView.userInteractionEnabled = NO;
+        //将nextVCL 放在相邻位置上，待滚动结束后在恢复真正位置
+        self.contentView.userInteractionEnabled = NO;//滚动期间 不允许用户手势操作
         self.currentController = nextVCL;
         CGRect rect = nextVCL.view.frame;
         rect.origin.x = realIndex * self.contentView.frame.size.width;

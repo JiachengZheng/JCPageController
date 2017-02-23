@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class JCPageContoller;
 
 @protocol JCPageContollerDataSource <NSObject>
 
 @required
-
 // return number of subControllers
 - (NSInteger)numberOfControllersInPageController;
 
@@ -26,7 +26,6 @@
 - (NSString *)reuseIdentifierForControllerAtIndex:(NSInteger)index;
 
 @optional
-
 // return each bar title
 - (NSString *)pageContoller:(JCPageContoller *)pageContoller titleForCellAtIndex:(NSInteger)index;
 
@@ -41,13 +40,31 @@
 
 @end
 
+/**
+ *  Note
+ *
+ *  可以根据identifier 来重用的ViewController，重用最多创建两个ViewController
+ *  重用的ViewController 可以通过实现prepareForReuse 方法来做重用之前的准备
+ *
+ *
+ */
 @interface JCPageContoller : UIViewController
 
 @property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
 @property (nonatomic, weak) id<JCPageContollerDelegate> delegate;
 
+/**
+ 重新刷新页面
+ *
+ */
 - (void)reloadData;
 
+/**
+ 根据identifier 获取重用的Controller
+
+ @param identifier 唯一标识
+ @param index 展示的位置索引
+ */
 - (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index;
 
 

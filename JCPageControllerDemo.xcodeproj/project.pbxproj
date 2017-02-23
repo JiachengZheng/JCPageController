@@ -10,6 +10,7 @@
 		0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F52E1E5BDD3100F8236D /* Demo1PageController.m */; };
 		0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5311E5BDD4900F8236D /* Demo1Model.m */; };
 		0B47F5351E5C0A0400F8236D /* Demo1BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */; };
+		0B47F5441E5EB4B200F8236D /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B47F5431E5EB4B200F8236D /* TestViewController.m */; };
 		0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA711E4D84FD00C0E6C0 /* main.m */; };
 		0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA741E4D84FD00C0E6C0 /* AppDelegate.m */; };
 		0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1BA771E4D84FD00C0E6C0 /* ViewController.m */; };
@@ -28,6 +29,8 @@
 		0B47F5311E5BDD4900F8236D /* Demo1Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1Model.m; sourceTree = "<group>"; };
 		0B47F5331E5C0A0400F8236D /* Demo1BarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo1BarItem.h; sourceTree = "<group>"; };
 		0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo1BarItem.m; sourceTree = "<group>"; };
+		0B47F5421E5EB4B200F8236D /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		0B47F5431E5EB4B200F8236D /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		0BF1BA6D1E4D84FD00C0E6C0 /* JCPageControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCPageControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF1BA711E4D84FD00C0E6C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0BF1BA731E4D84FD00C0E6C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,7 +65,6 @@
 			children = (
 				0B47F52A1E5BDD1F00F8236D /* Controller */,
 				0B47F52B1E5BDD1F00F8236D /* Model */,
-				0B47F52C1E5BDD1F00F8236D /* View */,
 			);
 			path = Demo1;
 			sourceTree = "<group>";
@@ -85,13 +87,6 @@
 				0B47F5341E5C0A0400F8236D /* Demo1BarItem.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0B47F52C1E5BDD1F00F8236D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		0BF1BA641E4D84FD00C0E6C0 = {
@@ -124,6 +119,8 @@
 				0BF1BA7E1E4D84FD00C0E6C0 /* LaunchScreen.storyboard */,
 				0BF1BA811E4D84FD00C0E6C0 /* Info.plist */,
 				0BF1BA701E4D84FD00C0E6C0 /* Supporting Files */,
+				0B47F5421E5EB4B200F8236D /* TestViewController.h */,
+				0B47F5431E5EB4B200F8236D /* TestViewController.m */,
 			);
 			path = JCPageControllerDemo;
 			sourceTree = "<group>";
@@ -241,6 +238,7 @@
 				0B47F52F1E5BDD3100F8236D /* Demo1PageController.m in Sources */,
 				0BF1BA951E4D897E00C0E6C0 /* JCPageContoller.m in Sources */,
 				0BF1BA781E4D84FD00C0E6C0 /* ViewController.m in Sources */,
+				0B47F5441E5EB4B200F8236D /* TestViewController.m in Sources */,
 				0BF1BA751E4D84FD00C0E6C0 /* AppDelegate.m in Sources */,
 				0B47F5321E5BDD4900F8236D /* Demo1Model.m in Sources */,
 				0BF1BA721E4D84FD00C0E6C0 /* main.m in Sources */,

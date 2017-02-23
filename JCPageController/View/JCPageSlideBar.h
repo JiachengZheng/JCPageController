@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "JCPageContoller.h"
-
-@class JCPageContoller;
 @class JCPageSlideBar;
-@protocol JCPageSlideBarDelegate <NSObject>
 
+@protocol JCPageSlideBarDelegate <NSObject>
 @optional
 - (void)pageSlideBar:(JCPageSlideBar *)pageSlideBar didSelectBarAtIndex:(NSInteger)index;
 

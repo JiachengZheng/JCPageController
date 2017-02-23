@@ -10,6 +10,7 @@
 #import "Demo1Model.h"
 #import "Demo1BarItem.h"
 #import "JCPageContoller.h"
+#import "TestViewController.h"
 
 #define kRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
 
@@ -61,7 +62,7 @@
 }
 
 - (UIViewController *)testController{
-    UIViewController *testController = [[UIViewController alloc]init];
+    TestViewController *testController = [[TestViewController alloc]init];
     UILabel *label = [[UILabel alloc]initWithFrame:testController.view.bounds];
     [testController.view addSubview:label];
     label.font = [UIFont systemFontOfSize:19];
@@ -91,6 +92,10 @@
 - (NSString *)pageContoller:(JCPageContoller *)pageContoller titleForCellAtIndex:(NSInteger)index{
     Demo1BarItem *item = self.model.barItems[index];
     return item.text;
+}
+
+- (void)pageContoller:(JCPageContoller *)pageContoller didShowController:(UIViewController *)controller atIndex:(NSInteger)index{
+    NSLog(@"page %ld did show",index);
 }
 
 @end
