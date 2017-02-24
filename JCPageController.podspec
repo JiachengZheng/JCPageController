@@ -11,7 +11,7 @@ s.author       = { "zhengjiacheng" => "jiacheng_zheng@163.com" }
 s.platform     = :ios, "7.0"
 s.ios.deployment_target = "7.0"
 s.source       = { :git => 'https://github.com/JiachengZheng/JCPageController.git', :tag => s.version }
-s.source_files  = 'JJCPageController/*.{h,m}'
+s.source_files  = 'JCPageController/*.{h,m}'
 
 # s.resource  = "icon.png"
 # s.resources = "Resources/*.png"
