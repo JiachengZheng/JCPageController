@@ -88,7 +88,7 @@ pod 'JCPageController'
 
 
 ```
-
+更多请查看Demo
 
 # About Me
 
