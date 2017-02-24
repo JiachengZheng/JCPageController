@@ -17,7 +17,7 @@
         DemoBarItem *item = [DemoBarItem new];
         item.text = titleArr[i];
         item.width = [self boundingSizeWithString:item.text font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width + 30 ;
-        item.identifier = [NSString stringWithFormat:@"id%ld",i];
+        item.identifier = [NSString stringWithFormat:@"id%ld",(long)i];
         if (needReuse.boolValue) {
             item.identifier = @"sameId";
         }

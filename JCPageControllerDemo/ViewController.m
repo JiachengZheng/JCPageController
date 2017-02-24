@@ -23,7 +23,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -39,6 +39,9 @@
     if (indexPath.row == 2) {
         title = @"固定宽度，重用，拉伸效果";
     }
+    if (indexPath.row == 3) {
+        title = @"动态宽度，重用，拉伸效果";
+    }
     cell.textLabel.text = title;
     return cell;
 }
@@ -47,21 +50,21 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DemoPageController *pageController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DemoPageController"];
-    NSString *title = @"";
     if (indexPath.row == 0) {
-        title = @"固定宽度，不重用";
         pageController.needReuse = NO;
         pageController.lineAinimationType = JCSlideBarLineAnimationFixedWidth;
     }
     if (indexPath.row == 1) {
-        title = @"文字宽度，重用";
         pageController.needReuse = YES;
         pageController.lineAinimationType = JCSlideBarLineAnimationDynamicWidth;
     }
     if (indexPath.row == 2) {
-        title = @"固定宽度，重用，拉伸";
         pageController.needReuse = YES;
-        pageController.lineAinimationType = JCSlideBarLineAnimationStretch;
+        pageController.lineAinimationType = JCSlideBarLineAnimationStretchFixedWidth;
+    }
+    if (indexPath.row == 3) {
+        pageController.needReuse = YES;
+        pageController.lineAinimationType = JCSlideBarLineAnimationStretchDynamicWidth;
     }
     pageController.title = @"Demo";
     [self.navigationController pushViewController:pageController animated:YES];

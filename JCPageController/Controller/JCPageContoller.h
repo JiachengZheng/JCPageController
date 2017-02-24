@@ -11,9 +11,10 @@
 @class JCPageContoller;
 
 typedef NS_ENUM(NSUInteger, JCSlideBarLineAnimationType) {
-    JCSlideBarLineAnimationFixedWidth,       //固定宽度
-    JCSlideBarLineAnimationDynamicWidth,     //动态宽度，与标题文字等宽
-    JCSlideBarLineAnimationStretch,          //拉伸效果
+    JCSlideBarLineAnimationFixedWidth = 0,       //固定宽度
+    JCSlideBarLineAnimationDynamicWidth = 1,     //动态宽度，与标题文字等宽
+    JCSlideBarLineAnimationStretchFixedWidth = 2,          //拉伸效果 固定宽度
+    JCSlideBarLineAnimationStretchDynamicWidth = 3,          //拉伸效果 动态宽度，与标题文字等宽
 };
 
 @protocol JCPageContollerDataSource <NSObject>

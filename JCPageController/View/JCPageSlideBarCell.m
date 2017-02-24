@@ -49,4 +49,9 @@
         self.label.textColor = [UIColor blackColor];
     }
 }
+
+- (void)prepareForReuse{
+    self.label.text = @"";
+    self.label.textColor = [UIColor blackColor];
+}
 @end

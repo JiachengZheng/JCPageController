@@ -26,7 +26,7 @@
 
 - (void)moveBottomLineToIndex:(NSInteger)index;
 
-- (void)stretchBottomLineToIndex:(NSInteger)index progress:(CGFloat)progress;
+- (void)stretchBottomLineFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress;
 
 - (void)reloadData;
 

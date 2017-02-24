@@ -28,9 +28,10 @@
 
 - (UIView *)line{
     if (!_line) {
-        CGFloat height = 2;
-        _line = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height - height, 23, height)];
+        CGFloat height = 2.5;
+        _line = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height - height-0.5, 23, height)];
         [self.collectionView addSubview:_line];
+        [_line.layer setCornerRadius:2];
         _line.backgroundColor = [UIColor redColor];
     }
     return _line;
@@ -70,7 +71,10 @@
             CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
             [self animateLineWithDynamicWidth:index width:width];}
             break;
-        case JCSlideBarLineAnimationStretch:
+        case JCSlideBarLineAnimationStretchFixedWidth:
+            [self animateLineWithDynamicWidth:index width:23];
+            break;
+        case JCSlideBarLineAnimationStretchDynamicWidth:
             [self animateLineWithDynamicWidth:index width:23];
             break;
     }
@@ -103,8 +107,38 @@
     }];
 }
 
-- (void)stretchBottomLineToIndex:(NSInteger)index progress:(CGFloat)progress{
-    NSLog(@"progress  ==  %f",progress);
+- (void)stretchBottomLineFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+    CGFloat width = 23;
+    CGRect nextCellRect = [self cellFrameAtIndex:toIndex];
+    CGRect curCellRect = [self cellFrameAtIndex:fromIndex];
+    
+    CGRect curlineRect = CGRectMake(curCellRect.origin.x + curCellRect.size.width/2 - width/2, self.line.frame.origin.y, width, self.line.frame.size.height);
+    CGRect nextlineRect = CGRectMake(nextCellRect.origin.x + nextCellRect.size.width/2 - width/2, self.line.frame.origin.y, width, self.line.frame.size.height);
+    
+    CGFloat originX = curlineRect.origin.x;
+    CGFloat centerGap = (nextlineRect.origin.x + nextlineRect.size.width/2) - (curlineRect.origin.x + curlineRect.size.width/2);
+    if (fromIndex < toIndex) {
+        if (progress <= 0.5) {
+            curlineRect.size.width = width + centerGap*(progress/0.5);
+        }else{
+            CGFloat p = (progress-0.5)/0.5;
+            curlineRect.size.width = width + centerGap - centerGap*p;
+            curlineRect.origin.x = originX + centerGap *((progress - 0.5)/0.5);
+        }
+    }else{
+        centerGap = (curlineRect.origin.x + curlineRect.size.width/2) - (nextlineRect.origin.x + nextlineRect.size.width/2);
+        if (progress <= 0.5) {
+            CGFloat p = progress/0.5;
+            curlineRect.size.width = width + centerGap*p;
+            curlineRect.origin.x = originX - centerGap *p;
+        }else{
+            CGFloat p = (progress - 0.5 ) /0.5;
+            curlineRect.size.width = width + centerGap - centerGap*p;
+            curlineRect.origin.x = nextlineRect.origin.x;
+        }
+    }
+    
+    self.line.frame = curlineRect;
 }
 
 - (void)reloadData{

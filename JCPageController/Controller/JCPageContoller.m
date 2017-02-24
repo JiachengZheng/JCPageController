@@ -91,7 +91,7 @@
         return;
     }
     //用 @“index_identifier” 来当做key
-    NSString *key = [NSString stringWithFormat:@"%ld_%@",index,identifier];
+    NSString *key = [NSString stringWithFormat:@"%ld_%@",(long)index,identifier];
     [self.controllersMap setObject:controller forKey:key];
 }
 
@@ -100,7 +100,7 @@
     if (!identifier) {
         return nil;
     }
-    NSString *key = [NSString stringWithFormat:@"%ld_%@",index,identifier];
+    NSString *key = [NSString stringWithFormat:@"%ld_%@",(long)index,identifier];
     UIViewController *vcl = [self.controllersMap objectForKey:key];
     return vcl;
 }
@@ -184,14 +184,19 @@
 #pragma mark -- UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat contentOffsetX = scrollView.contentOffset.x;
-    if (!self.isInteractionScroll) {
-        return;
-    }
-    
     if (contentOffsetX < 0) {
         [self.slideBar selectTabAtIndex:0];
         return;
     }
+    if (self.lineAinimationType >= JCSlideBarLineAnimationStretchFixedWidth && !self.didSelectBarToChangePage) {
+        // 动画时拉伸效果 && 手势滑动
+        [self stretchBottomLine];
+    }
+    
+    if (!self.isInteractionScroll) {
+        return;
+    }
+
     CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
     NSInteger page = contentOffsetX / self.contentView.frame.size.width;
     NSInteger nextPage = -1;
@@ -216,10 +221,17 @@
     self.lastOffsetX = contentOffsetX;
     
     if (self.currentIndex != page) {
+        //配置当前显示的controller
         self.currentIndex = page;
         self.currentController = self.nextController;
         [self.slideBar selectTabAtIndex:self.currentIndex];
     }
+    
+    [self checkNeedConfigNextPage:scrollToRight nextPage:nextPage];
+}
+
+- (void)checkNeedConfigNextPage:(BOOL)scrollToRight nextPage:(NSInteger)nextPage{
+    CGFloat contentOffsetX = self.contentView.contentOffset.x;
     BOOL needConfigNextPage = NO;
     if (scrollToRight) {
         if (contentOffsetX > self.currentIndex * self.contentView.frame.size.width) {
@@ -230,13 +242,9 @@
             needConfigNextPage = YES;
         }
     }
-    
     if (needConfigNextPage && self.nextIndex != nextPage) {
+        //配置下一个即将显示的controller
         [self willDraggingToNextController:nextPage];
-    }
-    
-    if (self.lineAinimationType == JCSlideBarLineAnimationStretch) {
-        [self stretchBottomLine];
     }
 }
 
@@ -244,7 +252,11 @@
     if (self.currentIndex == self.nextIndex) {
         return;
     }
-    [self.slideBar stretchBottomLineToIndex:self.nextIndex progress:1];
+    CGFloat offset = self.contentView.contentOffset.x;
+    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
+    CGFloat gap = fabs(curControllerOriginX - offset);
+    CGFloat progress = gap/self.contentView.frame.size.width;
+    [self.slideBar stretchBottomLineFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -257,9 +269,7 @@
     self.selectBarIndex = -1;
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
-    if (self.lineAinimationType != JCSlideBarLineAnimationStretch) {
-        [self.slideBar moveBottomLineToIndex:self.currentIndex];
-    }
+    [self.slideBar moveBottomLineToIndex:self.currentIndex];
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
