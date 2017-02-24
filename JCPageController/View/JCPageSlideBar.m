@@ -74,8 +74,12 @@
         case JCSlideBarLineAnimationStretchFixedWidth:
             [self animateLineWithDynamicWidth:index width:23];
             break;
-        case JCSlideBarLineAnimationStretchDynamicWidth:
-            [self animateLineWithDynamicWidth:index width:23];
+        case JCSlideBarLineAnimationStretchDynamicWidth:{
+            NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
+            CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+
+            [self animateLineWithDynamicWidth:index width:width];
+        }
             break;
     }
 }
@@ -107,7 +111,7 @@
     }];
 }
 
-- (void)stretchBottomLineFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+- (void)stretchBottomLineFixedWidthFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
     CGFloat width = 23;
     CGRect nextCellRect = [self cellFrameAtIndex:toIndex];
     CGRect curCellRect = [self cellFrameAtIndex:fromIndex];
@@ -140,6 +144,53 @@
     
     self.line.frame = curlineRect;
 }
+
+- (void)stretchBottomLineFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+    if (self.lineAinimationType == JCSlideBarLineAnimationStretchFixedWidth) {
+        [self stretchBottomLineFixedWidthFromIndex:fromIndex toIndex:toIndex progress:progress];
+    }else if (self.lineAinimationType == JCSlideBarLineAnimationStretchDynamicWidth) {
+        [self stretchBottomLineDynamicWidthFromIndex:fromIndex toIndex:toIndex progress:progress];
+    }
+}
+
+- (void)stretchBottomLineDynamicWidthFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+    NSString *curTitle = [self.dataSource pageContoller:_controller titleForCellAtIndex:fromIndex];
+    NSString *nextTitle = [self.dataSource pageContoller:_controller titleForCellAtIndex:toIndex];
+    CGFloat curWidth = [self boundingSizeWithString:curTitle font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+    CGFloat nextWidth = [self boundingSizeWithString:nextTitle font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+    
+    CGRect nextCellRect = [self cellFrameAtIndex:toIndex];
+    CGRect curCellRect = [self cellFrameAtIndex:fromIndex];
+    
+    CGRect curlineRect = CGRectMake(curCellRect.origin.x + curCellRect.size.width/2 - curWidth/2, self.line.frame.origin.y, curWidth, self.line.frame.size.height);
+    CGRect nextlineRect = CGRectMake(nextCellRect.origin.x + nextCellRect.size.width/2 - nextWidth/2, self.line.frame.origin.y, nextWidth, self.line.frame.size.height);
+    
+    CGFloat originX = curlineRect.origin.x;
+    CGFloat centerGap = (nextlineRect.origin.x + nextlineRect.size.width/2) - (curlineRect.origin.x + curlineRect.size.width/2);
+    if (fromIndex < toIndex) {
+        if (progress <= 0.5) {
+            curlineRect.size.width = (centerGap + nextWidth/2 - curWidth/2)*(progress/0.5) +  curWidth;
+        }else{
+            CGFloat p = (progress-0.5)/0.5;
+            curlineRect.size.width = centerGap + curWidth/2 + nextWidth/2 - (centerGap - nextWidth/2 + curWidth/2)*p;
+            curlineRect.origin.x = originX + (centerGap - nextWidth/2 + curWidth/2) *p;
+        }
+    }else{
+        centerGap = (curlineRect.origin.x + curlineRect.size.width/2) - (nextlineRect.origin.x + nextlineRect.size.width/2);
+        if (progress <= 0.5) {
+            CGFloat p = progress/0.5;
+            curlineRect.size.width = curWidth + (centerGap - curWidth/2 + nextWidth/2 )*p;
+            curlineRect.origin.x = originX - (centerGap - curWidth/2 + nextWidth/2) *p;
+        }else{
+            CGFloat p = (progress - 0.5 ) /0.5;
+            curlineRect.size.width = centerGap + curWidth/2 + nextWidth/2 - (centerGap - nextWidth/2 + curWidth/2)*p;
+            curlineRect.origin.x = nextlineRect.origin.x;
+        }
+    }
+    
+    self.line.frame = curlineRect;
+}
+
 
 - (void)reloadData{
     [self.collectionView reloadData];
