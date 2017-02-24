@@ -11,7 +11,7 @@
 
 @interface JCPageSlideBar() <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) UIView *line;
+@property (nonatomic, strong) UIView *line;//底部横线
 @property (nonatomic, assign) NSInteger curSelectIndex;
 @end
 
@@ -84,8 +84,7 @@
             NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
             CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
 
-            [self animateLineWithDynamicWidth:index width:width];
-        }
+            [self animateLineWithDynamicWidth:index width:width]; }
             break;
     }
 }
@@ -128,6 +127,10 @@
     fromCell.transform = CGAffineTransformMakeScale(scale - currentTransform , scale - currentTransform);
     toCell.transform = CGAffineTransformMakeScale(1 + currentTransform, 1 + currentTransform);
     
+    if (self.lineAinimationType < JCSlideBarLineAnimationStretchFixedWidth) {
+        //不是拉伸效果就不用变颜色了
+        return;
+    }
     CGFloat narR,narG,narB,narA;
     [kTitleNormalColor getRed:&narR green:&narG blue:&narB alpha:&narA];
     CGFloat selR,selG,selB,selA;

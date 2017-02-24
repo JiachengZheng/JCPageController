@@ -202,6 +202,9 @@
     if (!self.isInteractionScroll) {
         return;
     }
+    if (self.scaleSelectedBar) {
+        [self scaleBar];
+    }
 
     CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
     NSInteger page = contentOffsetX / self.contentView.frame.size.width;
@@ -262,8 +265,18 @@
     CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
     CGFloat gap = fabs(curControllerOriginX - offset);
     CGFloat progress = gap/self.contentView.frame.size.width;
-    [self.slideBar scaleTitleFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
     [self.slideBar stretchBottomLineFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
+}
+
+- (void)scaleBar{
+    if (self.currentIndex == self.nextIndex) {
+        return;
+    }
+    CGFloat offset = self.contentView.contentOffset.x;
+    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
+    CGFloat gap = fabs(curControllerOriginX - offset);
+    CGFloat progress = gap/self.contentView.frame.size.width;
+    [self.slideBar scaleTitleFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
