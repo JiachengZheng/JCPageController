@@ -5,7 +5,7 @@ page scroll View controller,simple,high custom,and have tabBar styles
 pod 'JCPageController'
 ```
 # ScreenShot
-![](./JCPageController/JCPageControllerDemo/demo.gif)
+![](https://github.com/JiachengZheng/JCPageController/blob/master/JCPageControllerDemo/demo.gif)
 
 
 
