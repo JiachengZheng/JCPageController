@@ -12,6 +12,7 @@
 @interface JCPageSlideBar() <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UIView *line;
+@property (nonatomic, assign) NSInteger curSelectIndex;
 @end
 
 @implementation JCPageSlideBar
@@ -58,7 +59,12 @@
 }
 
 - (void)selectTabAtIndex:(NSInteger)index{
+    self.curSelectIndex = index;
     [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    if (self.scaleSelectedBar) {
+        UICollectionViewCell *fromCell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+        fromCell.transform = CGAffineTransformMakeScale(kSlideBarCellScaleSize , kSlideBarCellScaleSize);
+    }
 }
 
 - (void)moveBottomLineToIndex:(NSInteger)index{
@@ -109,6 +115,29 @@
         self.line.frame = rect;
         self.line.center = CGPointMake(cellRect.origin.x + cellRect.size.width/2, self.line.center.y);
     }];
+}
+
+- (void)scaleTitleFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+    if (!self.scaleSelectedBar) {
+        return;
+    }
+    CGFloat scale = kSlideBarCellScaleSize;
+    CGFloat currentTransform = (scale - 1) * progress;
+    UICollectionViewCell *fromCell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]];
+    UICollectionViewCell *toCell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]];
+    fromCell.transform = CGAffineTransformMakeScale(scale - currentTransform , scale - currentTransform);
+    toCell.transform = CGAffineTransformMakeScale(1 + currentTransform, 1 + currentTransform);
+    
+    CGFloat narR,narG,narB,narA;
+    [kTitleNormalColor getRed:&narR green:&narG blue:&narB alpha:&narA];
+    CGFloat selR,selG,selB,selA;
+    [kTitleSelectedColor getRed:&selR green:&selG blue:&selB alpha:&selA];
+    CGFloat detalR = narR - selR ,detalG = narG - selG,detalB = narB - selB,detalA = narA - selA;
+    
+    UILabel *fromTitle = [fromCell viewWithTag:kSlideBarCellTitleTag];
+    UILabel *toTitle = [toCell viewWithTag:kSlideBarCellTitleTag];
+    fromTitle.textColor = [UIColor colorWithRed:selR+detalR*progress green:selG+detalG*progress blue:selB+detalB*progress alpha:selA+detalA*progress];
+    toTitle.textColor = [UIColor colorWithRed:narR-detalR*progress green:narG-detalG*progress blue:narB-detalB*progress alpha:narA-detalA*progress];
 }
 
 - (void)stretchBottomLineFixedWidthFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
@@ -226,6 +255,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    if (self.scaleSelectedBar) {
+        if (self.curSelectIndex != indexPath.row) {
+            UICollectionViewCell *fromCell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.curSelectIndex inSection:0]];
+            fromCell.transform = CGAffineTransformMakeScale(1 , 1);
+        }
+        UICollectionViewCell *toCell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:indexPath.row inSection:0]];
+        toCell.transform = CGAffineTransformMakeScale(kSlideBarCellScaleSize , kSlideBarCellScaleSize);
+    }
     [self.delegate pageSlideBar:self didSelectBarAtIndex:indexPath.row];
 }
 

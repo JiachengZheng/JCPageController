@@ -8,6 +8,7 @@
 
 #import "JCPageContoller.h"
 #import "JCPageSlideBar.h"
+#import "JCPageSlideBarCell.h"
 
 @interface JCPageContoller () <UIScrollViewDelegate, JCPageSlideBarDelegate>
 
@@ -63,6 +64,11 @@
         [self.view addSubview:_contentView];
     }
     return _contentView;
+}
+
+- (void)setScaleSelectedBar:(BOOL)scaleSelectedBar{
+    _scaleSelectedBar = scaleSelectedBar;
+    self.slideBar.scaleSelectedBar = scaleSelectedBar;
 }
 
 - (void)setDataSource:(id<JCPageContollerDataSource>)dataSource{
@@ -256,6 +262,7 @@
     CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
     CGFloat gap = fabs(curControllerOriginX - offset);
     CGFloat progress = gap/self.contentView.frame.size.width;
+    [self.slideBar scaleTitleFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
     [self.slideBar stretchBottomLineFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
 }
 

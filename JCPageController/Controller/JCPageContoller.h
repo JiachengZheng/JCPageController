@@ -58,6 +58,7 @@ typedef NS_ENUM(NSUInteger, JCSlideBarLineAnimationType) {
 @interface JCPageContoller : UIViewController
 
 @property (nonatomic, assign) JCSlideBarLineAnimationType lineAinimationType;
+@property (nonatomic) BOOL scaleSelectedBar;
 
 @property (nonatomic, weak) id<JCPageContollerDataSource> dataSource;
 @property (nonatomic, weak) id<JCPageContollerDelegate> delegate;

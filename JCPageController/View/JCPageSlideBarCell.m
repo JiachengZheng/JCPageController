@@ -30,6 +30,7 @@
         [self.contentView addSubview:_label];
         _label.font = [UIFont systemFontOfSize:13];
         _label.textColor = [UIColor blackColor];
+        _label.tag = kSlideBarCellTitleTag;
         _label.textAlignment = NSTextAlignmentCenter;
         _label.backgroundColor = [UIColor whiteColor];
     }
@@ -44,9 +45,9 @@
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];
     if (selected) {
-        self.label.textColor = [UIColor redColor];
+        self.label.textColor = kTitleSelectedColor;
     }else{
-        self.label.textColor = [UIColor blackColor];
+        self.label.textColor = kTitleNormalColor;
     }
 }
 

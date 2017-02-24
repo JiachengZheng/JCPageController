@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) JCSlideBarLineAnimationType lineAinimationType;
 @property (nonatomic) BOOL needReuse;
+@property (nonatomic) BOOL scaleSelectedBar;
 
 @end

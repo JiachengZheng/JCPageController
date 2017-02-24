@@ -23,7 +23,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -41,6 +41,9 @@
     }
     if (indexPath.row == 3) {
         title = @"动态宽度，重用，拉伸效果";
+    }
+    if (indexPath.row == 4) {
+        title = @"固定宽度，重用，拉伸效果,选中放大";
     }
     cell.textLabel.text = title;
     return cell;
@@ -65,6 +68,11 @@
     if (indexPath.row == 3) {
         pageController.needReuse = YES;
         pageController.lineAinimationType = JCSlideBarLineAnimationStretchDynamicWidth;
+    }
+    if (indexPath.row == 4) {
+        pageController.needReuse = YES;
+        pageController.lineAinimationType = JCSlideBarLineAnimationStretchFixedWidth;
+        pageController.scaleSelectedBar = YES;
     }
     pageController.title = @"Demo";
     [self.navigationController pushViewController:pageController animated:YES];

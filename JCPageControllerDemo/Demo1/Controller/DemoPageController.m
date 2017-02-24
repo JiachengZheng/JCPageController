@@ -48,6 +48,7 @@
         _pageController.delegate = self;
         _pageController.lineAinimationType = self.lineAinimationType;
         _pageController.dataSource = self;
+        _pageController.scaleSelectedBar = self.scaleSelectedBar;
         [self addChildViewController:_pageController];
         [self.view addSubview:_pageController.view];
     }
