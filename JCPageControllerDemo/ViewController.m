@@ -9,8 +9,12 @@
 #import "ViewController.h"
 #import "JCPageContoller.h"
 #import "DemoPageController.h"
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface ViewController ()
+@property (weak, nonatomic) IBOutlet UISwitch *widthSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *reuseSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *stretchSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *scaleSwitch;
+
 @end
 
 @implementation ViewController
@@ -22,61 +26,30 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell" forIndexPath:indexPath];
-    
-    NSString *title = @"";
-    if (indexPath.row == 0) {
-        title = @"固定宽度，不重用";
-    }
-    if (indexPath.row == 1) {
-        title = @"动态文字宽度，重用";
-    }
-    if (indexPath.row == 2) {
-        title = @"固定宽度，重用，拉伸效果";
-    }
-    if (indexPath.row == 3) {
-        title = @"动态宽度，重用，拉伸效果";
-    }
-    if (indexPath.row == 4) {
-        title = @"固定宽度，重用，拉伸效果,选中放大";
-    }
-    cell.textLabel.text = title;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (IBAction)pushDemoController:(id)sender {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DemoPageController *pageController = [mainStoryboard instantiateViewControllerWithIdentifier:@"DemoPageController"];
-    if (indexPath.row == 0) {
-        pageController.needReuse = NO;
-        pageController.lineAinimationType = JCSlideBarLineAnimationFixedWidth;
-    }
-    if (indexPath.row == 1) {
-        pageController.needReuse = YES;
-        pageController.lineAinimationType = JCSlideBarLineAnimationDynamicWidth;
-    }
-    if (indexPath.row == 2) {
-        pageController.needReuse = YES;
-        pageController.lineAinimationType = JCSlideBarLineAnimationStretchFixedWidth;
-    }
-    if (indexPath.row == 3) {
-        pageController.needReuse = YES;
-        pageController.lineAinimationType = JCSlideBarLineAnimationStretchDynamicWidth;
-    }
-    if (indexPath.row == 4) {
-        pageController.needReuse = YES;
-        pageController.lineAinimationType = JCSlideBarLineAnimationStretchFixedWidth;
-        pageController.scaleSelectedBar = YES;
-    }
     pageController.title = @"Demo";
+    pageController.needReuse = self.reuseSwitch.on;
+    JCSlideBarLineAnimationType type = JCSlideBarLineAnimationFixedWidth;
+    if(self.widthSwitch.on){
+        if (self.stretchSwitch.on) {
+            type = JCSlideBarLineAnimationStretchDynamicWidth;
+        }else{
+            type = JCSlideBarLineAnimationDynamicWidth;
+        }
+    }else{
+        if (self.stretchSwitch.on) {
+            type = JCSlideBarLineAnimationStretchFixedWidth;
+        }else{
+            type = JCSlideBarLineAnimationFixedWidth;
+        }
+    }
+    pageController.scaleSelectedBar = self.scaleSwitch.on;
+    pageController.lineAinimationType = type;
     [self.navigationController pushViewController:pageController animated:YES];
 }
+
 
 
 @end
