@@ -12,7 +12,7 @@ pod 'JCPageController'
 
 ![](https://github.com/JiachengZheng/JCPageController/blob/master/JCPageControllerDemo/demo.gif)
 
-#Datasource and delegate
+#DataSource and Delegate
 
 ```
 @protocol JCPageContollerDataSource <NSObject>
