@@ -36,13 +36,6 @@
     return self.view.frame.size.height;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.controllersMap = [NSMutableDictionary dictionary];
-}
-
 - (JCPageSlideBar *)slideBar{
     if (!_slideBar) {
         _slideBar = [[JCPageSlideBar alloc]initWithFrame:CGRectMake(0, 0, self.width, 40)];
@@ -76,18 +69,6 @@
     self.slideBar.dataSource = dataSource;
 }
 
-- (void)reloadData{
-    NSInteger count = [self.dataSource numberOfControllersInPageController];
-    self.contentView.contentSize = CGSizeMake(count * self.width, self.contentView.frame.size.height);
-    [self.slideBar reloadData];
-    self.slideBar.lineAinimationType = self.lineAinimationType;
-    self.currentIndex = 0;
-    [self.slideBar moveBottomLineToIndex:self.currentIndex];
-    [self.slideBar selectTabAtIndex:self.currentIndex];
-    self.currentController = [self configControllerAtIndex:self.currentIndex];
-    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
-}
-
 - (void)saveController:(UIViewController *)controller atIndex:(NSInteger)index{
     if (!controller) {
         return;
@@ -111,6 +92,27 @@
     return vcl;
 }
 
+#pragma mark 
+#pragma mark -- viewDidLoad
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.controllersMap = [NSMutableDictionary dictionary];
+}
+
+- (void)reloadData{
+    NSInteger count = [self.dataSource numberOfControllersInPageController];
+    self.contentView.contentSize = CGSizeMake(count * self.width, self.contentView.frame.size.height);
+    [self.slideBar reloadData];
+    self.slideBar.lineAinimationType = self.lineAinimationType;
+    self.currentIndex = 0;
+    [self.slideBar moveBottomLineToIndex:self.currentIndex];
+    [self.slideBar selectTabAtIndex:self.currentIndex];
+    self.currentController = [self configControllerAtIndex:self.currentIndex];
+    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+}
+
 - (UIViewController *)configControllerAtIndex:(NSInteger)index{
     NSInteger count = [self.dataSource numberOfControllersInPageController];
     if (index >= count || index < 0) {
@@ -131,6 +133,7 @@
     return controller;
 }
 
+//获取重用的controller
 - (UIViewController *)dequeueReusableControllerWithReuseIdentifier:(NSString *)identifier atIndex:(NSInteger)index{
     if (!identifier) {
         return nil;
@@ -186,6 +189,49 @@
     return nextController;
 }
 
+//检查是否需要配置下一个即将出现的controller
+- (void)checkNeedConfigNextPage:(BOOL)scrollToRight nextPage:(NSInteger)nextPage{
+    CGFloat contentOffsetX = self.contentView.contentOffset.x;
+    BOOL needConfigNextPage = NO;
+    if (scrollToRight) {
+        if (contentOffsetX > self.currentIndex * self.contentView.frame.size.width) {
+            needConfigNextPage = YES;
+        }
+    }else{
+        if (contentOffsetX < self.currentIndex * self.contentView.frame.size.width) {
+            needConfigNextPage = YES;
+        }
+    }
+    if (needConfigNextPage && self.nextIndex != nextPage) {
+        //配置下一个即将显示的controller
+        [self willDraggingToNextController:nextPage];
+    }
+}
+
+//滑动scrollView 时拉伸tabbar 底部横线
+- (void)stretchBottomLine{
+    if (self.currentIndex == self.nextIndex) {
+        return;
+    }
+    CGFloat offset = self.contentView.contentOffset.x;
+    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
+    CGFloat gap = fabs(curControllerOriginX - offset);
+    CGFloat progress = gap/self.contentView.frame.size.width;
+    [self.slideBar stretchBottomLineFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
+}
+
+//滑动scrollView 时放大tabbar
+- (void)scaleBar{
+    if (self.currentIndex == self.nextIndex) {
+        return;
+    }
+    CGFloat offset = self.contentView.contentOffset.x;
+    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
+    CGFloat gap = fabs(curControllerOriginX - offset);
+    CGFloat progress = gap/self.contentView.frame.size.width;
+    [self.slideBar scaleTitleFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
+}
+
 #pragma mark
 #pragma mark -- UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -239,48 +285,8 @@
     [self checkNeedConfigNextPage:scrollToRight nextPage:nextPage];
 }
 
-- (void)checkNeedConfigNextPage:(BOOL)scrollToRight nextPage:(NSInteger)nextPage{
-    CGFloat contentOffsetX = self.contentView.contentOffset.x;
-    BOOL needConfigNextPage = NO;
-    if (scrollToRight) {
-        if (contentOffsetX > self.currentIndex * self.contentView.frame.size.width) {
-            needConfigNextPage = YES;
-        }
-    }else{
-        if (contentOffsetX < self.currentIndex * self.contentView.frame.size.width) {
-            needConfigNextPage = YES;
-        }
-    }
-    if (needConfigNextPage && self.nextIndex != nextPage) {
-        //配置下一个即将显示的controller
-        [self willDraggingToNextController:nextPage];
-    }
-}
-
-- (void)stretchBottomLine{
-    if (self.currentIndex == self.nextIndex) {
-        return;
-    }
-    CGFloat offset = self.contentView.contentOffset.x;
-    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
-    CGFloat gap = fabs(curControllerOriginX - offset);
-    CGFloat progress = gap/self.contentView.frame.size.width;
-    [self.slideBar stretchBottomLineFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
-}
-
-- (void)scaleBar{
-    if (self.currentIndex == self.nextIndex) {
-        return;
-    }
-    CGFloat offset = self.contentView.contentOffset.x;
-    CGFloat curControllerOriginX = self.currentIndex * self.contentView.frame.size.width;
-    CGFloat gap = fabs(curControllerOriginX - offset);
-    CGFloat progress = gap/self.contentView.frame.size.width;
-    [self.slideBar scaleTitleFromIndex:self.currentIndex toIndex:self.nextIndex progress:progress];
-}
-
+//手势切换页面结束
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    //手势切换页面结束
     NSInteger page = scrollView.contentOffset.x / self.contentView.frame.size.width;
     [self.slideBar selectTabAtIndex:page];
     self.currentIndex = page;
@@ -293,6 +299,7 @@
     [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
 }
 
+//点击tabbar 切换页面结束
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     if (self.didSelectBarToChangePage) {
         //点击tab 切换页面结束 恢复 self.currentController 真正位置
@@ -323,7 +330,7 @@
 }
 
 #pragma mark
-#pragma mark -- JCPageSlideBarDelegate
+#pragma mark -- JCPageSlideBarDelegate 点击SlideBar 来切换页面
 - (void)pageSlideBar:(JCPageSlideBar *)pageSlideBar didSelectBarAtIndex:(NSInteger)index{
     if (self.currentIndex == index) {
         return;
