@@ -73,18 +73,24 @@
             [self animateLineWithDynamicWidth:index width:23];
             break;
         case JCSlideBarLineAnimationDynamicWidth:{
-            NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
-            CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
-            [self animateLineWithDynamicWidth:index width:width];}
+            if ([self.dataSource respondsToSelector:@selector(pageContoller:titleForCellAtIndex:)]) {
+                NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
+                CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+                [self animateLineWithDynamicWidth:index width:width];
+            }
+        }
             break;
         case JCSlideBarLineAnimationStretchFixedWidth:
             [self animateLineWithDynamicWidth:index width:23];
             break;
         case JCSlideBarLineAnimationStretchDynamicWidth:{
-            NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
-            CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
-
-            [self animateLineWithDynamicWidth:index width:width]; }
+            if ([self.dataSource respondsToSelector:@selector(pageContoller:titleForCellAtIndex:)]) {
+                NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:index];
+                CGFloat width = [self boundingSizeWithString:title font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
+                
+                [self animateLineWithDynamicWidth:index width:width];
+            }
+        }
             break;
     }
 }
@@ -186,6 +192,9 @@
 }
 
 - (void)stretchBottomLineDynamicWidthFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress{
+    if (![self.dataSource respondsToSelector:@selector(pageContoller:titleForCellAtIndex:)]) {
+        return;
+    }
     NSString *curTitle = [self.dataSource pageContoller:_controller titleForCellAtIndex:fromIndex];
     NSString *nextTitle = [self.dataSource pageContoller:_controller titleForCellAtIndex:toIndex];
     CGFloat curWidth = [self boundingSizeWithString:curTitle font:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(MAXFLOAT, 40)].width;
@@ -236,11 +245,13 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     JCPageSlideBarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCPageSlideBarCell" forIndexPath:indexPath];
-    NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:indexPath.row];
-    if (!title) {
-        title = @"";
+    if ([self.dataSource respondsToSelector:@selector(pageContoller:titleForCellAtIndex:)]) {
+        NSString *title = [self.dataSource pageContoller:_controller titleForCellAtIndex:indexPath.row];
+        if (!title) {
+            title = @"";
+        }
+        cell.text = title;
     }
-    cell.text = title;
     return cell;
 }
 
