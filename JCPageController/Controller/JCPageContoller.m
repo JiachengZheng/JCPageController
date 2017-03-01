@@ -67,6 +67,10 @@
 - (void)setDataSource:(id<JCPageContollerDataSource>)dataSource{
     _dataSource = dataSource;
     self.slideBar.dataSource = dataSource;
+    NSAssert([dataSource respondsToSelector:@selector(numberOfControllersInPageController)], @"JCPageContollerDataSource numberOfControllersInPageController not impletement!");
+    NSAssert([dataSource respondsToSelector:@selector(pageContoller:controllerAtIndex:)], @"JCPageContollerDataSource pageContoller:controllerAtIndex: not impletement!");
+    NSAssert([dataSource respondsToSelector:@selector(pageContoller:widthForCellAtIndex:)], @"JCPageContollerDataSource pageContoller:widthForCellAtIndex: not impletement!");
+    NSAssert([dataSource respondsToSelector:@selector(reuseIdentifierForControllerAtIndex:)], @"JCPageContollerDataSource reuseIdentifierForControllerAtIndex: not impletement!");
 }
 
 - (void)saveController:(UIViewController *)controller atIndex:(NSInteger)index{
@@ -110,7 +114,9 @@
     [self.slideBar moveBottomLineToIndex:self.currentIndex];
     [self.slideBar selectTabAtIndex:self.currentIndex];
     self.currentController = [self configControllerAtIndex:self.currentIndex];
-    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    if ([self.delegate respondsToSelector:@selector(pageContoller:didShowController:atIndex:)]) {
+        [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    }
 }
 
 - (UIViewController *)configControllerAtIndex:(NSInteger)index{
@@ -296,7 +302,9 @@
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
     [self.slideBar moveBottomLineToIndex:self.currentIndex];
-    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    if ([self.delegate respondsToSelector:@selector(pageContoller:didShowController:atIndex:)]) {
+        [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    }
 }
 
 //点击tabbar 切换页面结束
@@ -315,7 +323,9 @@
     self.lastOffsetX = scrollView.contentOffset.x;
     self.contentView.userInteractionEnabled = YES;
     [self.slideBar moveBottomLineToIndex:self.currentIndex];
-    [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    if ([self.delegate respondsToSelector:@selector(pageContoller:didShowController:atIndex:)]) {
+        [self.delegate pageContoller:self didShowController:self.currentController atIndex:self.currentIndex];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
