@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "JCPageController"
-s.version      = "1.0.0"
+s.version      = "1.0.4"
 s.summary      = "JCPageController"
 
 s.homepage     = "https://github.com/JiachengZheng/JCPageController"
