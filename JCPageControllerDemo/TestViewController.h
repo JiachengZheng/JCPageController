@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DemoBarItem.h"
 @interface TestViewController : UIViewController
+
+- (void)reloadData:(DemoBarItem *)item;
 
 @end

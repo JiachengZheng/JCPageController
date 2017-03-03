@@ -157,5 +157,23 @@
             </objects>
             <point key="canvasLocation" x="1526" y="113"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="YCz-rp-ZIn">
+            <objects>
+                <viewController storyboardIdentifier="TestViewController" id="sst-xk-pzp" customClass="TestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dra-tn-3JO"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cvd-ut-WlK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3dJ-TM-4XJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fwl-E7-9aT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2154" y="115"/>
+        </scene>
     </scenes>
 </document>

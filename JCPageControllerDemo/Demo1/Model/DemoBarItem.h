@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 @interface DemoBarItem : NSObject
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, assign) CGFloat width;
 @property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) NSInteger index;
 @end

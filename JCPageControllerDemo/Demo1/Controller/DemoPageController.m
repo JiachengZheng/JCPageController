@@ -9,10 +9,7 @@
 #import "DemoPageController.h"
 #import "DemoModel.h"
 #import "DemoBarItem.h"
-
 #import "TestViewController.h"
-
-#define kRandomColor [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:arc4random()%255/255.0];
 
 @interface DemoPageController () <JCPageContollerDataSource, JCPageContollerDelegate>
 @property (nonatomic, strong) DemoModel *model;
@@ -64,25 +61,21 @@
     return item.identifier;
 }
 
-- (UIViewController *)testController{
-    TestViewController *testController = [[TestViewController alloc]init];
-    UILabel *label = [[UILabel alloc]initWithFrame:testController.view.bounds];
-    [testController.view addSubview:label];
-    label.font = [UIFont systemFontOfSize:18];
-    testController.view.backgroundColor = kRandomColor;
-    label.tag = 2000;
-    label.textAlignment = NSTextAlignmentCenter;
-    return testController;
-}
-
 - (UIViewController *)pageContoller:(JCPageContoller *)pageContoller controllerAtIndex:(NSInteger)index{
     DemoBarItem *item = self.model.barItems[index];
     UIViewController *controller = [pageContoller dequeueReusableControllerWithReuseIdentifier:item.identifier atIndex:index];
     if (!controller) {
-        controller = self.testController;
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+         TestViewController *testController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TestViewController"];
+        controller = testController;
+        
+        CGRect rect = self.pageController.view.bounds;
+        rect.origin.y = 40;//slideBar height
+        rect.size.height = rect.size.height - rect.origin.y;
+        testController.view.frame = rect;//这里的frame就是象征性设置下，为了调用testController viewDidLoad，之后还会重新设置frame，有待改进
     }
-    UILabel *label = [controller.view viewWithTag:2000];
-    label.text = item.text;
+    TestViewController *testVCL = (TestViewController *)controller;
+    [testVCL reloadData:item];
     return controller;
 }
 
